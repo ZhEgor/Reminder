@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Reminder</string>
+    <string name="toast_added_message">The message has been successfully added!</string>
+    <string name="add">Add</string>
+    <string name="spelling">Spelling</string>
+    <string name="translation">Translation</string>
+    <string name="pronunciation">Pronunciation</string>
+</resources>
