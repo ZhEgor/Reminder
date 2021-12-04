@@ -1,17 +1,19 @@
 package com.example.reminder.ui.createWord
 
+import androidx.lifecycle.viewModelScope
 import com.example.reminder.base.BaseViewModel
 import com.example.reminder.data.entity.Word
-import com.example.reminder.events.CreateWordEvent
 import com.example.reminder.states.CreateWordState
 import com.example.reminder.useCase.AddNewWordUseCase
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import java.util.*
 
-abstract class CreateWordViewModel(addNewWordUseCase: AddNewWordUseCase) :
-    BaseViewModel<CreateWordState, CreateWordEvent>(
-        useCases = setOf(addNewWordUseCase),
-        reducer = CreateWordReducer()
-    ) {
+abstract class CreateWordViewModel : BaseViewModel() {
+
+    abstract val state: StateFlow<CreateWordState>
 
     abstract fun addNewWord(
         spelling: String,
@@ -21,16 +23,21 @@ abstract class CreateWordViewModel(addNewWordUseCase: AddNewWordUseCase) :
 
 }
 
-class CreateWordViewModelImpl(addNewWordUseCase: AddNewWordUseCase) :
-    CreateWordViewModel(addNewWordUseCase) {
+class CreateWordViewModelImpl(private val addNewWordUseCase: AddNewWordUseCase) :
+    CreateWordViewModel() {
+
+    override val state = MutableStateFlow( CreateWordState())
 
     override fun addNewWord(
         spelling: String,
         translation: String,
         pronunciation: String,
     ) {
-        event(
-            CreateWordEvent.AddNewWord(
+        viewModelScope.launch {
+
+            state.value = state.value.copy(isLoading = true)
+
+            addNewWordUseCase.invoke(
                 Word(
                     id = UUID.randomUUID().toString(),
                     spelling = spelling,
@@ -42,7 +49,10 @@ class CreateWordViewModelImpl(addNewWordUseCase: AddNewWordUseCase) :
                     repetitionsShowed = 0
                 )
             )
-        )
+
+            state.value = state.value.copy(isLoading = false)
+            cancel()
+        }
 
     }
 

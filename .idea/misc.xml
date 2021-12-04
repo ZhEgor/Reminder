@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/activity_main.xml" value="0.13380281690140844" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable/item_word_background.xml" value="0.2703125" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/dialog_progress.xml" value="0.4" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_create_word.xml" value="0.264" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_word_details.xml" value="0.1386861313868613" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_word_list.xml" value="0.1386861313868613" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/item_word.xml" value="0.4" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

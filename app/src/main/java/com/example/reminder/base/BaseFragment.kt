@@ -7,15 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.viewbinding.ViewBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
-import java.lang.reflect.ParameterizedType
-import kotlin.reflect.KClass
-
 
 typealias BindingInflation<VB> = (LayoutInflater, ViewGroup?, Boolean) -> VB
 
-abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*, *>> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     private var _binding: VB? = null
     protected val binding: VB
