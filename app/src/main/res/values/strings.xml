@@ -5,4 +5,6 @@
     <string name="spelling">Spelling</string>
     <string name="translation">Translation</string>
     <string name="pronunciation">Pronunciation</string>
+    <string name="title_fragment_create_word">Create Word</string>
+    <string name="title_fragment_word_list">Word List</string>
 </resources>

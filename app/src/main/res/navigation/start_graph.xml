@@ -8,7 +8,12 @@
     <fragment
         android:id="@+id/createWordFragment"
         android:name="com.example.reminder.ui.createWord.CreateWordFragment"
-        android:label="fragment_create_word"
+        android:label="@string/title_fragment_create_word"
         tools:layout="@layout/fragment_create_word" />
+    <fragment
+        android:id="@+id/wordListFragment"
+        android:name="com.example.reminder.ui.wordList.WordListFragment"
+        android:label="@string/title_fragment_word_list"
+        tools:layout="@layout/fragment_word_list" />
 
 </navigation>
