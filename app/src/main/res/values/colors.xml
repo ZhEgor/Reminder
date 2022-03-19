@@ -5,7 +5,98 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="transparent">#00000000</color>
+
+    <!-- Common colors -->
+    <color name="black">#121212</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black_5">#F3F3F3</color>
+    <color name="black_5_opacity_50">#80F3F3F3</color>
+    <color name="red">#ED0E00</color>
+    <color name="red_80">#F13E33</color>
+    <color name="red_10">#FFE2E0</color>
+    <color name="turquoise">#1598A6</color>
+    <color name="turquoise_80">#44ADB8</color>
+    <color name="turquoise_bright_10">#E8F8F9</color>
+    <color name="pink">#E0016C</color>
+    <color name="pink_80">#E63489</color>
+    <color name="pink_10">#FFE7F3</color>
+    <color name="blue_dark">#09546E</color>
+    <color name="blue_dark_80">#3A768B</color>
+    <color name="blue_light_60">#DEF6FF</color>
+    <color name="blue_pale_40">#DCEAFF</color>
+    <color name="yellow">#FED731</color>
+    <color name="yellow_30">#FFF0BD</color>
+    <color name="brown_light_35">#FBECCF</color>
+    <color name="brown_pale">#EDDFD3</color>
+    <color name="lime_40">#F5FFCD</color>
+    <color name="green_pale">#E3FFC7</color>
+    <color name="pumpkin_35">#FFDDBE</color>
+    <color name="violet_light_40">#F8E3FF</color>
+
+    <!-- Communication colors -->
+    <color name="red_35">#FFAFAA</color>
+    <color name="red_25">#FFC3BF</color>
+    <color name="pumpkin">#FF8144</color>
+    <color name="ginger_pale">#FFC247</color>
+    <color name="ginger_pale_60">#FFD98D</color>
+    <color name="pink_40">#F399C4</color>
+    <color name="pink_30">#F6B3D3</color>
+    <color name="violet">#B196FF</color>
+    <color name="violet_light">#E6BEFF</color>
+    <color name="turquoise_bright">#33BECC</color>
+    <color name="turquoise_bright_50">#99DEE5</color>
+    <color name="turquoise_pale">#B7F0E6</color>
+    <color name="blue_light">#C3EFFF</color>
+    <color name="blue_pale">#A7C7F9</color>
+    <color name="blue_pale_70">#C2DAFF</color>
+    <color name="blue_bright">#55A5C3</color>
+    <color name="green_dark">#6EA603</color>
+    <color name="green_bright">#B0D749</color>
+    <color name="lime">#E3FF74</color>
+    <color name="green_light">#EBFF9B</color>
+    <color name="pumpkin_bright">#FF9A23</color>
+    <color name="yellow_70">#FFE37E</color>
+
+    <!-- Interface colors -->
+    <color name="red_dark">#AD0000</color>
+    <color name="red_dark_25">#EBBFBF</color>
+    <color name="red_dark_5">#FBF2F2</color>
+    <color name="orange_dark">#E56700</color>
+    <color name="orange">#FA973B</color>
+    <color name="orange_30">#FDE0C4</color>
+    <color name="orange_10">#FFF5EB</color>
+    <color name="blue">#0071C2</color>
+    <color name="green">#2FAC3B</color>
+    <color name="green_40">#ACDEB1</color>
+    <color name="green_10">#EAF7EB</color>
+    <color name="burgundy">#9A2148</color>
+    <color name="burgundy_light">#FFEBEB</color>
+    <color name="rose_bud">#FAB7B3</color>
+
+    <!-- Black gradation -->
+    <color name="black_90">#2A2A2A</color>
+    <color name="black_80">#414141</color>
+    <color name="black_70">#595959</color>
+    <color name="black_60">#717171</color>
+    <color name="black_50">#888888</color>
+    <color name="black_40">#A0A0A0</color>
+    <color name="black_30">#B8B8B8</color>
+    <color name="black_20">#D0D0D0</color>
+    <color name="black_10">#E7E7E7</color>
+    <color name="black_2">#FAFAFA</color>
+
+    <!-- White gradation with alpha channel -->
+    <color name="white_96">#96FFFFFF</color>
+    <color name="white_80">#80FFFFFF</color>
+    <color name="white_70">#70FFFFFF</color>
+    <color name="white_50">#50FFFFFF</color>
+    <color name="white_30">#30FFFFFF</color>
+    <color name="white_20">#20FFFFFF</color>
+    <color name="white_10">#10FFFFFF</color>
+    <color name="white_5">#05FFFFFF</color>
+    <color name="white_0">#00FFFFFF</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
 </resources>

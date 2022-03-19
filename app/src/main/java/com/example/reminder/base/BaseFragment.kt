@@ -26,9 +26,4 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
         _binding = bindingInflation(inflater, container, false)
         return binding.root
     }
-
-    protected fun <T> LiveData<T>.subscribe(block: (T) -> Unit) {
-        observe(viewLifecycleOwner, block)
-    }
-
 }

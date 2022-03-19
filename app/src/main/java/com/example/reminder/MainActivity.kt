@@ -1,6 +1,7 @@
 package com.example.reminder
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.containerFragment)
     }
     private val router by inject<Router>()
+    private var lastOnBackPressed: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,4 +38,16 @@ class MainActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.white)
     }
 
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - lastOnBackPressed <= APP_EXIT_DELAY) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(this, getString(R.string.press_back_again_to_leave), Toast.LENGTH_SHORT).show()
+        }
+        lastOnBackPressed = System.currentTimeMillis()
+    }
+
+    companion object {
+        private const val APP_EXIT_DELAY = 1000
+    }
 }

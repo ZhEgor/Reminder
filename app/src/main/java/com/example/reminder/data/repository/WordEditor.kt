@@ -4,6 +4,6 @@ import com.example.reminder.data.entity.Word
 
 interface WordEditor {
 
-    fun addWord(word: Word)
+    suspend fun addWord(word: Word)
 
 }

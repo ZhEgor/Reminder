@@ -11,9 +11,9 @@
         android:label="@string/title_fragment_create_word"
         tools:layout="@layout/fragment_create_word" />
     <fragment
-        android:id="@+id/wordListFragment"
-        android:name="com.example.reminder.ui.wordList.WordListFragment"
-        android:label="@string/title_fragment_word_list"
-        tools:layout="@layout/fragment_word_list" />
+        android:id="@+id/wordListHolderFragment"
+        android:name="com.example.reminder.ui.wordListHolder.WordListHolderFragment"
+        android:label="@string/title_fragment_word_list_holder"
+        tools:layout="@layout/fragment_word_list_holder" />
 
 </navigation>

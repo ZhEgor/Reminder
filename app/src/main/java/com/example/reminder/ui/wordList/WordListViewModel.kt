@@ -3,46 +3,34 @@ package com.example.reminder.ui.wordList
 import androidx.lifecycle.viewModelScope
 import com.example.reminder.base.BaseViewModel
 import com.example.reminder.data.entity.Word
-import com.example.reminder.states.WordListState
-import com.example.reminder.useCase.LoadWordsUseCase
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import com.example.reminder.useCase.word.LoadWordsFromPositionUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 abstract class WordListViewModel : BaseViewModel() {
+    abstract val state: SharedFlow<WordListState>
 
-    abstract val state: StateFlow<WordListState>
-
-    abstract fun loadWords()
-
-    abstract fun navigateToWordDetailsScreen (word: Word)
-
+    abstract fun loadWordsFromPosition(categoryId: String, position: Int, limit: Int)
+    abstract fun navigateToWordDetailsScreen(word: Word)
 }
 
-class WordListViewModelImpl(private val loadWordsUseCase: LoadWordsUseCase) : WordListViewModel() {
+class WordListViewModelImpl(private val loadWordsFromPositionUseCase: LoadWordsFromPositionUseCase) :
+    WordListViewModel() {
 
-    override val state = MutableStateFlow(WordListState())
+    override val state = MutableSharedFlow<WordListState>()
+    private var words: List<Word> = emptyList()
 
-    init {
-        loadWords()
-    }
-
-    override fun loadWords() {
-        viewModelScope.launch {
-            loadWordsUseCase.invoke().collect { words ->
-                state.value = state.value.copy(
-                    isLoading = false,
-                    words = words
-                )
-                cancel()
-            }
+    override fun loadWordsFromPosition(categoryId: String, position: Int, limit: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            state.emit(WordListState.IsLoading(true))
+            words = words + loadWordsFromPositionUseCase.invoke(categoryId, position, limit)
+            state.emit(WordListState.ReceivedWords(words))
+            state.emit(WordListState.IsLoading(false))
         }
     }
 
     override fun navigateToWordDetailsScreen(word: Word) {
 
     }
-
 }

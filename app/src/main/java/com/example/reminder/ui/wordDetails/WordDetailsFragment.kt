@@ -8,7 +8,7 @@
 //import android.view.ViewGroup
 //import com.example.reminder.R
 //import com.example.reminder.base.BaseFragment
-//import com.example.reminder.ui.wordList.WordListViewModel
+//import com.example.reminder.ui.wordListHolder.WordListHolderViewModel
 //
 //class WordDetailsFragment : BaseFragment<WordDetailsViewModel<>>(R.layout.fragment_word_details) {
 //

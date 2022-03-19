@@ -1,4 +1,4 @@
-package com.example.reminder.useCase
+package com.example.reminder.useCase.word
 
 import com.example.reminder.data.entity.Word
 import com.example.reminder.data.repository.WordFetcher
@@ -6,8 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class LoadWordsUseCase(private val wordFetcher: WordFetcher) {
 
-    fun invoke(): Flow<List<Word>> {
+    suspend fun invoke(): Flow<List<Word>> {
         return wordFetcher.fetchWords()
     }
-
 }

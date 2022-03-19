@@ -16,6 +16,8 @@ data class Word(
     val translation: String,
     @ColumnInfo(name = WordTableConst.PRONUNCIATION)
     val pronunciation: String,
+    @ColumnInfo(name = WordTableConst.CATEGORY_ID)
+    val categoryId: String,
     @ColumnInfo(name = WordTableConst.CREATION_DATE)
     val creationDate: String,
     @ColumnInfo(name = WordTableConst.LAST_SHOW_DATE)

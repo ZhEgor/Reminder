@@ -16,7 +16,7 @@ class ProgressDialog {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setContentView(R.layout.dialog_progress)
             setCancelable(false)
-            window?.setBackgroundDrawableResource(R.color.transparent)
+            window?.setBackgroundDrawableResource(R.color.white_0)
             show()
         }
     }
