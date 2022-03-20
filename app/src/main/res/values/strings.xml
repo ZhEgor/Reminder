@@ -7,6 +7,8 @@
     <string name="pronunciation">Pronunciation</string>
     <string name="title_fragment_create_word">Create Word</string>
     <string name="title_fragment_word_list_holder">Word List Holder</string>
+    <string name="menu_title_create_word">Create Word</string>
+    <string name="menu_title_word_list">Your Words</string>
     <string name="category_name">Category name</string>
     <string name="language">Language</string>
     <string name="write_to_search">Write to search…</string>

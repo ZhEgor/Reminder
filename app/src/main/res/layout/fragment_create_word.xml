@@ -22,59 +22,128 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" >
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
 
-        <TextView
-            android:id="@+id/tv_spellingLabel"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextViewCreateWord"
-            android:text="@string/spelling" />
+            android:layout_marginHorizontal="@dimen/normal_100"
+            android:layout_marginTop="@dimen/normal_100">
+
+
+            <TextView
+                android:id="@+id/tv_spellingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/spelling"
+                style="@style/TextViewCreateWord"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/ib_spelling_paste"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_baseline_content_paste_24"
+                android:backgroundTint="@color/black_60"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <EditText
             android:id="@+id/et_spellingField"
+            style="@style/EditTextCreateWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/EditTextCreateWord"
             android:hint="@string/spelling" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black_50" />
 
-
-        <TextView
-            android:id="@+id/tv_translationLabel"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextViewCreateWord"
-            android:text="@string/translation" />
+            android:layout_marginHorizontal="@dimen/normal_100"
+            android:layout_marginTop="@dimen/normal_100">
+
+            <TextView
+                android:id="@+id/tv_translationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/translation"
+                style="@style/TextViewCreateWord"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/ib_translation_paste"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/ic_baseline_content_paste_24"
+                android:backgroundTint="@color/black_60"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/et_translationField"
+            style="@style/EditTextCreateWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/EditTextCreateWord"
             android:hint="@string/translation" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black_50" />
 
-        <TextView
-            android:id="@+id/tv_pronunciationLabel"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextViewCreateWord"
-            android:text="@string/pronunciation" />
+            android:layout_marginHorizontal="@dimen/normal_100"
+            android:layout_marginTop="@dimen/normal_100">
+
+            <TextView
+                android:id="@+id/tv_pronunciationLabel"
+                style="@style/TextViewCreateWord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/pronunciation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/ib_pronunciation_paste"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/ic_baseline_content_paste_24"
+                android:backgroundTint="@color/black_60"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/et_pronunciationField"
+            style="@style/EditTextCreateWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/EditTextCreateWord"
             android:hint="@string/pronunciation" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -84,6 +153,8 @@
             android:id="@+id/tv_categoryLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_100"
+            android:layout_marginStart="@dimen/normal_100"
             style="@style/TextViewCreateWord"
             android:text="@string/category" />
 
@@ -125,9 +196,9 @@
 
     <Button
         android:id="@+id/btn_add"
+        style="@style/ButtonDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/ButtonDefault"
         android:layout_marginStart="@dimen/normal_100"
         android:layout_marginEnd="@dimen/normal_100"
         android:layout_marginBottom="@dimen/normal_175"

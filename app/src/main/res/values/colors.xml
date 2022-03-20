@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+
+    <color name="ic_launcher_background">#95BFFF</color>
+
+    // first color
+    <color name="uranian_blue">#C3E7FF</color>
+    <color name="periwinkle_crayola">#D3E3FD</color>
+    <color name="ghost_white">#F4F6FE</color>
+    <color name="baby_blue_eyes">#95BFFF</color>
+    <color name="maximum_blue_purple">#A8B6F9</color>
+    <color name="lavender_blue">#D2D2FF</color>
 
     <!-- Common colors -->
     <color name="black">#121212</color>
@@ -26,52 +31,8 @@
     <color name="blue_pale_40">#DCEAFF</color>
     <color name="yellow">#FED731</color>
     <color name="yellow_30">#FFF0BD</color>
-    <color name="brown_light_35">#FBECCF</color>
-    <color name="brown_pale">#EDDFD3</color>
-    <color name="lime_40">#F5FFCD</color>
-    <color name="green_pale">#E3FFC7</color>
-    <color name="pumpkin_35">#FFDDBE</color>
-    <color name="violet_light_40">#F8E3FF</color>
+    <color name="brown_light_35">#D3E3FD</color>
 
-    <!-- Communication colors -->
-    <color name="red_35">#FFAFAA</color>
-    <color name="red_25">#FFC3BF</color>
-    <color name="pumpkin">#FF8144</color>
-    <color name="ginger_pale">#FFC247</color>
-    <color name="ginger_pale_60">#FFD98D</color>
-    <color name="pink_40">#F399C4</color>
-    <color name="pink_30">#F6B3D3</color>
-    <color name="violet">#B196FF</color>
-    <color name="violet_light">#E6BEFF</color>
-    <color name="turquoise_bright">#33BECC</color>
-    <color name="turquoise_bright_50">#99DEE5</color>
-    <color name="turquoise_pale">#B7F0E6</color>
-    <color name="blue_light">#C3EFFF</color>
-    <color name="blue_pale">#A7C7F9</color>
-    <color name="blue_pale_70">#C2DAFF</color>
-    <color name="blue_bright">#55A5C3</color>
-    <color name="green_dark">#6EA603</color>
-    <color name="green_bright">#B0D749</color>
-    <color name="lime">#E3FF74</color>
-    <color name="green_light">#EBFF9B</color>
-    <color name="pumpkin_bright">#FF9A23</color>
-    <color name="yellow_70">#FFE37E</color>
-
-    <!-- Interface colors -->
-    <color name="red_dark">#AD0000</color>
-    <color name="red_dark_25">#EBBFBF</color>
-    <color name="red_dark_5">#FBF2F2</color>
-    <color name="orange_dark">#E56700</color>
-    <color name="orange">#FA973B</color>
-    <color name="orange_30">#FDE0C4</color>
-    <color name="orange_10">#FFF5EB</color>
-    <color name="blue">#0071C2</color>
-    <color name="green">#2FAC3B</color>
-    <color name="green_40">#ACDEB1</color>
-    <color name="green_10">#EAF7EB</color>
-    <color name="burgundy">#9A2148</color>
-    <color name="burgundy_light">#FFEBEB</color>
-    <color name="rose_bud">#FAB7B3</color>
 
     <!-- Black gradation -->
     <color name="black_90">#2A2A2A</color>

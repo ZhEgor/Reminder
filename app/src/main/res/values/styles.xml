@@ -2,8 +2,6 @@
 <resources>
 
     <style name="TextViewCreateWord">
-        <item name="android:layout_marginHorizontal">@dimen/normal_100 </item>
-        <item name="android:layout_marginTop">@dimen/normal_100 </item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/createWordFragment"
-        android:name="com.example.reminder.ui.createWord.CreateWordFragment"
+        android:name="com.zhiroke.reminder.ui.createWord.CreateWordFragment"
         android:label="@string/title_fragment_create_word"
         tools:layout="@layout/fragment_create_word" />
     <fragment
         android:id="@+id/wordListHolderFragment"
-        android:name="com.example.reminder.ui.wordListHolder.WordListHolderFragment"
+        android:name="com.zhiroke.reminder.ui.wordListHolder.WordListHolderFragment"
         android:label="@string/title_fragment_word_list_holder"
         tools:layout="@layout/fragment_word_list_holder" />
 
