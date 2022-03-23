@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.zhiroke.reminder.R
 import com.zhiroke.reminder.databinding.DialogCreateCategoryBinding
+import com.zhiroke.reminder.util.ext.formatField
 
 class CreateCategoryDialog(val onCreateCategory: (String, String) -> Unit) : DialogFragment() {
 
@@ -33,8 +34,8 @@ class CreateCategoryDialog(val onCreateCategory: (String, String) -> Unit) : Dia
             errorIcon?.setBounds(0, 0, errorIcon.intrinsicWidth, errorIcon.intrinsicHeight)
 
             btnCreate.setOnClickListener {
-                val categoryName = etCategoryName.text.toString()
-                val language = etLanguage.text.toString()
+                val categoryName = etCategoryName.text.toString().formatField()
+                val language = etLanguage.text.toString().formatField()
                 var hasError = false
                 if (categoryName.isBlank()) {
                     etCategoryName.setError(getString(R.string.this_field_cannot_be_blank), errorIcon)

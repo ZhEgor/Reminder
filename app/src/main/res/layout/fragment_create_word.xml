@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.createWord.CreateWordFragment">
 
+
+    <include
+        android:id="@+id/incl_dash"
+        layout="@layout/layout_dash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -14,9 +24,10 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/incl_dash" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -34,11 +45,11 @@
 
             <TextView
                 android:id="@+id/tv_spellingLabel"
+                style="@style/TextViewCreateWord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="1dp"
                 android:text="@string/spelling"
-                style="@style/TextViewCreateWord"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -61,6 +72,7 @@
             style="@style/EditTextCreateWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
             android:hint="@string/spelling" />
 
         <View
@@ -76,10 +88,10 @@
 
             <TextView
                 android:id="@+id/tv_translationLabel"
+                style="@style/TextViewCreateWord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/translation"
-                style="@style/TextViewCreateWord"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -151,11 +163,11 @@
 
         <TextView
             android:id="@+id/tv_categoryLabel"
+            style="@style/TextViewCreateWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_100"
             android:layout_marginStart="@dimen/normal_100"
-            style="@style/TextViewCreateWord"
+            android:layout_marginTop="@dimen/normal_100"
             android:text="@string/category" />
 
 
@@ -199,13 +211,14 @@
         style="@style/ButtonDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/large_100"
         android:layout_marginStart="@dimen/normal_100"
         android:layout_marginEnd="@dimen/normal_100"
-        android:layout_marginBottom="@dimen/normal_175"
         android:text="@string/add"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,20 @@
 package com.zhiroke.reminder.ui.createWord
 
 import androidx.navigation.NavController
-import com.zhiroke.reminder.R
 import com.zhiroke.reminder.navigation.NavigationComponentScreen
-import timber.log.Timber
+import com.zhiroke.reminder.ui.wordListHolder.WordListHolderFragmentDirections
 
-class CreateWordScreen : NavigationComponentScreen{
+class CreateWordScreen(private val from: From) : NavigationComponentScreen {
 
     override fun execute(navigator: NavController) {
-        Timber.d("I was here!")
-//        navigator.navigate(R.layout.fragment_create_word)
+        when (from) {
+            is From.WordListHolder -> {
+                navigator.navigate(WordListHolderFragmentDirections.actionWordListHolderFragmentToCreateWordFragment())
+            }
+        }
     }
 
+    sealed class From {
+        object WordListHolder : From()
+    }
 }

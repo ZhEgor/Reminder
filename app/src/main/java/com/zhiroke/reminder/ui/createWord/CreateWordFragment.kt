@@ -7,18 +7,20 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.zhiroke.reminder.R
-import com.zhiroke.reminder.base.BaseFragment
+import com.zhiroke.reminder.base.BaseBottomSheetDialogFragment
 import com.zhiroke.reminder.base.BindingInflation
 import com.zhiroke.reminder.data.entity.Category
 import com.zhiroke.reminder.databinding.FragmentCreateWordBinding
 import com.zhiroke.reminder.ui.common.CreateCategoryDialog
 import com.zhiroke.reminder.ui.common.ProgressDialog
 import com.zhiroke.reminder.ui.common.selectItemDialog.SelectItemDialog
+import com.zhiroke.reminder.util.ext.formatField
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CreateWordFragment : BaseFragment<FragmentCreateWordBinding, CreateWordViewModel>() {
+class CreateWordFragment :
+    BaseBottomSheetDialogFragment<FragmentCreateWordBinding, CreateWordViewModel>() {
 
     override val viewModel by viewModel<CreateWordViewModel>()
     override val bindingInflation: BindingInflation<FragmentCreateWordBinding>
@@ -72,15 +74,33 @@ class CreateWordFragment : BaseFragment<FragmentCreateWordBinding, CreateWordVie
     }
 
     private fun addWord() {
+        binding.apply {
+            val spelling = etSpellingField.text.toString().formatField()
+            val translation = etTranslationField.text.toString().formatField()
+            val pronunciation = etPronunciationField.text.toString().formatField()
+            val category = viewModel.categories.find { it.name == tvCategoryField.text.toString() }
+            val hasError = validateFields(spelling, translation, category)
+
+            if (!hasError) {
+                etSpellingField.text = null
+                etTranslationField.text = null
+                etPronunciationField.text = null
+
+                viewModel.addNewWord(
+                    spelling = spelling,
+                    translation = translation,
+                    pronunciation = pronunciation,
+                    categoryId = category!!.id
+                )
+            }
+        }
+    }
+
+    private fun validateFields(spelling: String, translation: String, category: Category?): Boolean {
         val errorIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_error_24)
         errorIcon?.setBounds(0, 0, errorIcon.intrinsicWidth, errorIcon.intrinsicHeight)
-
+        var hasError = false
         binding.apply {
-            val spelling = etSpellingField.text.toString()
-            val translation = etTranslationField.text.toString()
-            val pronunciation = etPronunciationField.text.toString()
-            val category = viewModel.categories.find { it.name == tvCategoryField.text.toString() }
-            var hasError = false
 
             if (!viewModel.validateFieldsSpelling(spelling)) {
                 etSpellingField.setError(getString(R.string.this_field_cannot_be_blank), errorIcon)
@@ -102,19 +122,8 @@ class CreateWordFragment : BaseFragment<FragmentCreateWordBinding, CreateWordVie
                 )
                 hasError = true
             }
-            if (!hasError) {
-                etSpellingField.text = null
-                etTranslationField.text = null
-                etPronunciationField.text = null
-
-                viewModel.addNewWord(
-                    spelling = spelling,
-                    translation = translation,
-                    pronunciation = pronunciation,
-                    categoryId = category!!.id
-                )
-            }
         }
+        return hasError
     }
 
     private fun observeViewModel() {

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Reminder</string>
-    <string name="toast_added_message">The message has been successfully added!</string>
     <string name="add">Add</string>
     <string name="spelling">Spelling</string>
     <string name="translation">Translation</string>
@@ -20,10 +19,9 @@
     <string name="write_a_category_name">Write a category name</string>
     <string name="create_category">Create category</string>
     <string name="this_field_cannot_be_blank">This field cannot be blank</string>
-    <string name="new_word">NEW WORD</string>
+    <string name="new_word">New word</string>
     <string name="category">Category</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="press_back_again_to_leave">Press the back again to exit the app.</string>
-
 </resources>

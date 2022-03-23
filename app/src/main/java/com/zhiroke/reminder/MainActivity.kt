@@ -5,8 +5,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.zhiroke.reminder.databinding.ActivityMainBinding
 import com.zhiroke.reminder.navigation.Router
 import org.koin.android.ext.android.inject
@@ -15,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private val navController by lazy {
-        findNavController(R.id.containerFragment)
+        (supportFragmentManager.findFragmentById(R.id.containerFragment) as NavHostFragment).navController
     }
     private val router by inject<Router>()
     private var lastOnBackPressed: Long = 0
@@ -33,8 +32,6 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         router.attachNavController(navController)
         setupStatusBar()
-
-        binding?.bottomNavigation?.setupWithNavController(navController)
     }
 
     private fun setupStatusBar() {

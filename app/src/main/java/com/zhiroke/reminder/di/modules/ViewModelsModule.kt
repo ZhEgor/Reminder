@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val viewModelsModule = module {
 
     viewModel<CreateWordViewModel> { CreateWordViewModelImpl(get(), get(), get(), get(), get()) }
-    viewModel<WordListHolderViewModel> { WordListHolderViewModelImpl(get()) }
+    viewModel<WordListHolderViewModel> { WordListHolderViewModelImpl(get(), get()) }
     viewModel<WordListViewModel> { parameters -> WordListViewModelImpl(categoryId = parameters.get(), get()) }
 //    viewModel<WordDetailsViewModel> { WordDetailsViewModelImpl(get()) }
 

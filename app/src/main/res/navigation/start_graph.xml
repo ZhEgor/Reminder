@@ -3,17 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/start_graph"
-    app:startDestination="@id/createWordFragment">
+    app:startDestination="@id/wordListHolderFragment">
 
-    <fragment
-        android:id="@+id/createWordFragment"
-        android:name="com.zhiroke.reminder.ui.createWord.CreateWordFragment"
-        android:label="@string/title_fragment_create_word"
-        tools:layout="@layout/fragment_create_word" />
     <fragment
         android:id="@+id/wordListHolderFragment"
         android:name="com.zhiroke.reminder.ui.wordListHolder.WordListHolderFragment"
         android:label="@string/title_fragment_word_list_holder"
-        tools:layout="@layout/fragment_word_list_holder" />
+        tools:layout="@layout/fragment_word_list_holder">
+        <action
+            android:id="@+id/action_wordListHolderFragment_to_createWordFragment"
+            app:destination="@id/createWordFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/createWordFragment"
+        android:name="com.zhiroke.reminder.ui.createWord.CreateWordFragment"
+        android:label="@string/title_fragment_create_word"
+        tools:layout="@layout/fragment_create_word" />
 
 </navigation>

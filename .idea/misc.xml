@@ -6,6 +6,9 @@
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable-v21/app_widget_background.xml" value="0.2" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable-v21/app_widget_inner_view_background.xml" value="0.1285" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable/background_bottom_sheet.xml" value="0.126" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable/background_circle_add.xml" value="0.168" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable/background_dash.xml" value="0.1" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable/ic_baseline_content_paste_24.xml" value="0.123" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.1285" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.1285" />
@@ -22,11 +25,13 @@
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/dialog_create_category.xml" value="0.264" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/dialog_progress.xml" value="0.4" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/dialog_select_item.xml" value="0.264" />
-        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_create_word.xml" value="0.4" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_create_word.xml" value="0.34953703703703703" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_test_bottom_sheet.xml" value="0.16" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_word_details.xml" value="0.1386861313868613" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_word_list.xml" value="0.2" />
-        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_word_list_holder.xml" value="0.20863616930312098" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/fragment_word_list_holder.xml" value="0.264" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/item_word.xml" value="0.4" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/layout_dash.xml" value="0.1" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/listitem_category.xml" value="0.25416666666666665" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/listitem_item.xml" value="0.25416666666666665" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/layout/listitem_word.xml" value="0.536" />

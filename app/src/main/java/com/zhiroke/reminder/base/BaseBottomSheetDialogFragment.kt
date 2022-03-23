@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-typealias BindingInflation<VB> = (LayoutInflater, ViewGroup?, Boolean) -> VB
-
-abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
+abstract class BaseBottomSheetDialogFragment<VB : ViewBinding, VM : BaseViewModel> :
+    BottomSheetDialogFragment() {
 
     private var _binding: VB? = null
     protected val binding: VB
