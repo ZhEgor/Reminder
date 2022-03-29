@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/ghost_white"
+    android:background="@drawable/background_dialog"
     android:padding="@dimen/normal_100">
 
     <TextView
@@ -42,7 +42,7 @@
 
     <Button
         android:id="@+id/btn_cancel"
-        android:layout_width="103dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         style="@style/ButtonDefault"
@@ -53,7 +53,7 @@
 
     <Button
         android:id="@+id/btn_create"
-        android:layout_width="104dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create"
         style="@style/ButtonDefault"

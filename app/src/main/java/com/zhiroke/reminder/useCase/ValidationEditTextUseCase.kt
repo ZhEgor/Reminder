@@ -1,6 +1,6 @@
 package com.zhiroke.reminder.useCase
 
-class ValidationEditTextUseCase {
+object ValidationEditTextUseCase {
 
     fun validateSpelling(spelling: String): Boolean {
         return spelling.isNotBlank()
@@ -9,5 +9,4 @@ class ValidationEditTextUseCase {
     fun validateTranslation(translation: String): Boolean {
         return translation.isNotBlank()
     }
-
 }

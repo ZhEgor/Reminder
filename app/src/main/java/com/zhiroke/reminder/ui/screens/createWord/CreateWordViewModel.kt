@@ -1,4 +1,4 @@
-package com.zhiroke.reminder.ui.createWord
+package com.zhiroke.reminder.ui.screens.createWord
 
 import androidx.lifecycle.viewModelScope
 import com.zhiroke.reminder.base.BaseViewModel
@@ -36,8 +36,7 @@ class CreateWordViewModelImpl(
     private val addNewWordUseCase: AddNewWordUseCase,
     private val addNewCategoryUseCase: AddNewCategoryUseCase,
     private val updateCategoryUseCase: UpdateCategoryUseCase,
-    private val loadCategoriesUseCase: LoadCategoriesUseCase,
-    private val validationEditTextUseCase: ValidationEditTextUseCase
+    private val loadCategoriesUseCase: LoadCategoriesUseCase
 ) : CreateWordViewModel() {
 
     override val state = MutableStateFlow(CreateWordState())
@@ -106,10 +105,10 @@ class CreateWordViewModelImpl(
     }
 
     override fun validateFieldsSpelling(spelling: String): Boolean {
-        return validationEditTextUseCase.validateSpelling(spelling)
+        return ValidationEditTextUseCase.validateSpelling(spelling)
     }
 
     override fun validateFieldsTranslation(translation: String): Boolean {
-        return validationEditTextUseCase.validateTranslation(translation)
+        return ValidationEditTextUseCase.validateTranslation(translation)
     }
 }

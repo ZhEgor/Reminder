@@ -1,14 +1,16 @@
-package com.zhiroke.reminder.ui.wordList
+package com.zhiroke.reminder.ui.screens.wordList
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.zhiroke.reminder.R
 import com.zhiroke.reminder.base.BaseFragment
 import com.zhiroke.reminder.base.BindingInflation
 import com.zhiroke.reminder.data.entity.Category
 import com.zhiroke.reminder.data.entity.Word
 import com.zhiroke.reminder.databinding.FragmentWordListBinding
 import com.zhiroke.reminder.ui.common.ProgressDialog
+import com.zhiroke.reminder.ui.common.YesNoDialog
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,10 +24,20 @@ class WordListFragment : BaseFragment<FragmentWordListBinding, WordListViewModel
     override val bindingInflation: BindingInflation<FragmentWordListBinding>
         get() = FragmentWordListBinding::inflate
     private val progressDialog = ProgressDialog()
+    private val deleteDialog by lazy {
+        YesNoDialog(textBtnNo = "Cancel")
+    }
     private val adapter by lazy {
         WordRvAdapter(
-            onWordClicked = { word ->
-                viewModel.navigateToWordDetailsScreen(word)
+            onSaveWord = { word ->
+                viewModel.updateWord(word)
+            }, onDeleteWord = { word ->
+                deleteDialog.show(
+                    topicText = getString(R.string.delete_word_warning) + " \"${word.spelling}\"?",
+                    fragmentManager = parentFragmentManager,
+                    tag = TAG_DELETE_WARNING_DIALOG,
+                    onPressYes = { viewModel.deleteWord(word) }
+                )
             }, onEndReached = { position, limit ->
                 viewModel.loadWordsFromPosition(position, limit)
             }
@@ -73,6 +85,7 @@ class WordListFragment : BaseFragment<FragmentWordListBinding, WordListViewModel
 
     companion object {
 
+        private const val TAG_DELETE_WARNING_DIALOG = "delete_warning_dialog"
         private const val ARG_CATEGORY = "category"
 
         @JvmStatic

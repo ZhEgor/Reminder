@@ -2,6 +2,7 @@
     <string name="app_name">Reminder</string>
     <string name="add">Add</string>
     <string name="spelling">Spelling</string>
+    <string name="creationDate">Date of creation</string>
     <string name="translation">Translation</string>
     <string name="pronunciation">Pronunciation</string>
     <string name="title_fragment_create_word">Create Word</string>
@@ -24,4 +25,9 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="press_back_again_to_leave">Press the back again to exit the app.</string>
+    <string name="unknown_date">unknown date</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete_word_warning">Are you sure you want to delete the word</string>
+    <string name="no_changes_found">No changes found</string>
 </resources>

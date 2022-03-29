@@ -1,4 +1,4 @@
-package com.zhiroke.reminder.ui.wordListHolder
+package com.zhiroke.reminder.ui.screens.wordListHolder
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,7 @@ import com.zhiroke.reminder.data.entity.Category
 import com.zhiroke.reminder.databinding.FragmentWordListHolderBinding
 import com.zhiroke.reminder.ui.common.ProgressDialog
 import com.zhiroke.reminder.ui.util.FragmentPagerAdapter
-import com.zhiroke.reminder.ui.wordList.WordListFragment
+import com.zhiroke.reminder.ui.screens.wordList.WordListFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.flow.collect

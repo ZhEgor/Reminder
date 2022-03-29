@@ -1,4 +1,4 @@
-package com.zhiroke.reminder.ui.createWord
+package com.zhiroke.reminder.ui.screens.createWord
 
 import android.content.ClipboardManager
 import android.content.Context
@@ -152,7 +152,7 @@ class CreateWordFragment :
     }
 
     companion object {
-        const val TAG_SELECT_CATEGORY_DIALOG = "select_category_dialog"
-        const val TAG_CREATE_SELECT_CATEGORY_DIALOG = "create_category_dialog"
+        private const val TAG_SELECT_CATEGORY_DIALOG = "select_category_dialog"
+        private const val TAG_CREATE_SELECT_CATEGORY_DIALOG = "create_category_dialog"
     }
 }

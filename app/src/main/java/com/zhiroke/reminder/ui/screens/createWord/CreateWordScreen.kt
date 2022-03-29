@@ -1,8 +1,8 @@
-package com.zhiroke.reminder.ui.createWord
+package com.zhiroke.reminder.ui.screens.createWord
 
 import androidx.navigation.NavController
 import com.zhiroke.reminder.navigation.NavigationComponentScreen
-import com.zhiroke.reminder.ui.wordListHolder.WordListHolderFragmentDirections
+import com.zhiroke.reminder.ui.screens.wordListHolder.WordListHolderFragmentDirections
 
 class CreateWordScreen(private val from: From) : NavigationComponentScreen {
 

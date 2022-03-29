@@ -1,10 +1,10 @@
-package com.zhiroke.reminder.ui.wordListHolder
+package com.zhiroke.reminder.ui.screens.wordListHolder
 
 import androidx.lifecycle.viewModelScope
 import com.zhiroke.reminder.base.BaseViewModel
 import com.zhiroke.reminder.navigation.Command
 import com.zhiroke.reminder.navigation.Router
-import com.zhiroke.reminder.ui.createWord.CreateWordScreen
+import com.zhiroke.reminder.ui.screens.createWord.CreateWordScreen
 import com.zhiroke.reminder.useCase.category.LoadCategoriesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

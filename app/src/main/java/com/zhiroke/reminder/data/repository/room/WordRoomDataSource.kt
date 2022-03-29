@@ -14,6 +14,14 @@ class WordRoomDataSource(
         wordDao.addWord(word)
     }
 
+    override suspend fun updateWord(word: Word): Boolean {
+        return wordDao.updateWord(word) != 0
+    }
+
+    override suspend fun deleteWords(words: List<Word>): Int {
+        return wordDao.deleteWords(words)
+    }
+
     override suspend fun fetchWords(): Flow<List<Word>> {
         return wordDao.readAllWords()
     }
