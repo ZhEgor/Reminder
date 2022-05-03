@@ -3,7 +3,6 @@ package com.zhiroke.reminder
 import android.app.Application
 import com.zhiroke.reminder.di.modules.dataModule
 import com.zhiroke.reminder.di.modules.useCasesModule
-import com.zhiroke.reminder.di.modules.utilsModule
 import com.zhiroke.reminder.di.modules.viewModelsModule
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
@@ -23,7 +22,7 @@ class App : Application() {
 
         startKoin {
             androidContext(this@App)
-            modules(listOf(utilsModule, dataModule, useCasesModule, viewModelsModule))
+            modules(listOf(dataModule, useCasesModule, viewModelsModule))
         }
 
     }
