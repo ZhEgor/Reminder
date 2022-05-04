@@ -20,7 +20,7 @@
     <string name="write_a_category_name">Write a category name</string>
     <string name="create_category">Create category</string>
     <string name="this_field_cannot_be_blank">This field cannot be blank</string>
-    <string name="new_word">New word</string>
+    <string name="word_creator">"Word creator"</string>
     <string name="category">Category</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
@@ -30,4 +30,5 @@
     <string name="no">No</string>
     <string name="delete_word_warning">Are you sure you want to delete the word</string>
     <string name="no_changes_found">No changes found</string>
+    <string name="paste_from_clipboard">paste from clipboard</string>
 </resources>

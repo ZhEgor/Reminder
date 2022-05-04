@@ -10,13 +10,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.zhiroke.reminder.R
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.components.CreateWordField
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.components.Dash
+import com.zhiroke.reminder.feature_words.presentation.screens.createWord.components.SelectCategoryField
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -24,7 +26,6 @@ fun CreateWordScreen(
     navController: NavController?,
     viewModel: CreateWordViewModel = getViewModel()
 ) {
-    Timber.d("CreateWordScreen")
     val scrollState = rememberScrollState()
     val uiState = viewModel.uiState
     Column(
@@ -40,30 +41,32 @@ fun CreateWordScreen(
                 .width(80.dp)
                 .padding(16.dp)
         )
-        Text(text = "Word creator", style = MaterialTheme.typography.h5)
+        Text(text = stringResource(R.string.word_creator), style = MaterialTheme.typography.h5)
         CreateWordField(
-            title = "Spelling",
+            title = stringResource(R.string.spelling),
             value = uiState.spellingState,
             onValueChange = { uiState.spellingState = it }
         )
         CreateWordField(
-            title = "Translation",
+            title = stringResource(R.string.translation),
             value = uiState.translationState,
-
             onValueChange = { uiState.translationState = it }
         )
         CreateWordField(
-            title = "Pronunciation",
+            title = stringResource(R.string.pronunciation),
             value = uiState.pronunciationState,
             onValueChange = { uiState.pronunciationState = it }
         )
+        SelectCategoryField(text = null) {
+
+        }
         Button(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp, vertical = 32.dp),
             onClick = { viewModel.onEvent(CreateWordEvent.AddWord) }
         ) {
-            Text(text = "Add", style = MaterialTheme.typography.h6)
+            Text(text = stringResource(R.string.add), style = MaterialTheme.typography.h6)
         }
     }
 }

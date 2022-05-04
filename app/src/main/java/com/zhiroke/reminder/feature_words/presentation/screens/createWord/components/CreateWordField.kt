@@ -8,15 +8,16 @@ import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.zhiroke.reminder.R
 
 @Composable
 fun CreateWordField(
@@ -30,7 +31,7 @@ fun CreateWordField(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+                .padding(start = 16.dp, end = 16.dp),
             contentAlignment = Alignment.Center
         ) {
             Box(
@@ -59,7 +60,7 @@ fun CreateWordField(
                 ) {
                     Icon(
                         modifier = Modifier.size(20.dp),
-                        contentDescription = "paste from clipboard",
+                        contentDescription = stringResource(R.string.paste_from_clipboard),
                         imageVector = Icons.Default.ContentPaste,
                         tint = MaterialTheme.colors.onSurface
                     )
