@@ -8,6 +8,8 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -17,6 +19,7 @@ import androidx.navigation.NavController
 import com.zhiroke.reminder.R
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.components.CreateWordField
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.components.Dash
+import com.zhiroke.reminder.feature_words.presentation.screens.createWord.components.SelectCategoryDialog
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.components.SelectCategoryField
 import org.koin.androidx.compose.getViewModel
 
@@ -26,8 +29,10 @@ fun CreateWordScreen(
     navController: NavController?,
     viewModel: CreateWordViewModel = getViewModel()
 ) {
-    val scrollState = rememberScrollState()
     val uiState = viewModel.uiState
+    val scrollState = rememberScrollState()
+    val isDialogActive = remember { mutableStateOf(false) }
+    SelectCategoryDialog(isDialogActive = isDialogActive, viewModel = viewModel)
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,8 +62,8 @@ fun CreateWordScreen(
             value = uiState.pronunciationState,
             onValueChange = { uiState.pronunciationState = it }
         )
-        SelectCategoryField(text = null) {
-
+        SelectCategoryField(text = viewModel.uiState.selectedCategory?.name) {
+            isDialogActive.value = true
         }
         Button(
             modifier = Modifier

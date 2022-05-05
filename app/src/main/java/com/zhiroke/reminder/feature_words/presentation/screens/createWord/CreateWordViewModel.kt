@@ -20,7 +20,6 @@ import java.util.*
 abstract class CreateWordViewModel : BaseViewModel() {
 
     abstract val state: CreateWordState
-    abstract val categories: List<Category>
     abstract val uiState: CreateWordUIState
     abstract fun onEvent(event: CreateWordEvent)
 }
@@ -32,22 +31,35 @@ class CreateWordViewModelImpl(
 
     override var state by mutableStateOf(CreateWordState())
     override val uiState = CreateWordUIState()
-    override val categories: List<Category>
-        get() = _categories
-    private var _categories: List<Category> = emptyList()
+    private var categories: List<Category> = emptyList()
     private var getCategoriesJob: Job? = null
+
+    init {
+        loadCategories()
+    }
 
     override fun onEvent(event: CreateWordEvent) {
         when (event) {
-            is CreateWordEvent.AddWord -> {
+            CreateWordEvent.AddWord -> {
                 addNewWord(
                     spelling = uiState.spellingState,
                     translation = uiState.translationState,
                     pronunciation = uiState.pronunciationState,
-                    categoryId = "e53b2e67-0028-4dbc-b10b-71f3d51ad5dd"
+                    categoryId = uiState.selectedCategory?.id
                 )
-                // 1	e53b2e67-0028-4dbc-b10b-71f3d51ad5dd	A Song Of Ice and Fire	English	1648458870663
-                // 2	e02435bf-4452-44d4-9931-3eff4c149d73	Harry Potter	English	1648456864582
+            }
+            is CreateWordEvent.FindCategories -> {
+                findCategories(event.categoryName)
+            }
+        }
+    }
+
+    private fun findCategories(categoryName: String) {
+        uiState.resultCategoriesState = if (categoryName.isBlank()) {
+            categories
+        } else {
+            categories.filter { category ->
+                category.name.contains(categoryName, ignoreCase = true)
             }
         }
     }
@@ -56,10 +68,11 @@ class CreateWordViewModelImpl(
         spelling: String,
         translation: String,
         pronunciation: String,
-        categoryId: String
+        categoryId: String?
     ) {
         if (!validateFieldsSpelling(spelling)) return
         if (!validateFieldsTranslation(translation)) return
+        if (categoryId == null) return
         viewModelScope.launch(Dispatchers.IO) {
             wordUseCase.addWord(
                 Word(
@@ -108,11 +121,13 @@ class CreateWordViewModelImpl(
         }
     }
 
-    fun loadCategories() {
+    private fun loadCategories() {
         getCategoriesJob?.cancel()
         getCategoriesJob = categoryUseCase.loadCategories().onEach { categories ->
-            state = state.copy(isLoading = false, categories = categories)
-            _categories = categories
+            this.categories = categories
+            uiState.selectedCategory = categories.firstOrNull()
+            findCategories(uiState.categorySearchFieldState)
+            state = state.copy(isLoading = false)
         }.launchIn(viewModelScope)
     }
 
