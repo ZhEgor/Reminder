@@ -18,7 +18,7 @@
     <string name="create">Create</string>
     <string name="write_a_language">Write a language</string>
     <string name="write_a_category_name">Write a category name</string>
-    <string name="create_category">Create category</string>
+    <string name="create_category">Create new category</string>
     <string name="this_field_cannot_be_blank">This field cannot be blank</string>
     <string name="word_creator">"Word creator"</string>
     <string name="category">Category</string>

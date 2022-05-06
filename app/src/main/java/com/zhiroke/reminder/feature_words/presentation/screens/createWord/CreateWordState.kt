@@ -16,4 +16,6 @@ class CreateWordUIState {
     var selectedCategory: Category? by mutableStateOf(null)
     var categorySearchFieldState: String by mutableStateOf("")
     var resultCategoriesState: List<Category> by mutableStateOf(emptyList())
+    var categoryNameState: String by mutableStateOf("")
+    var categoryLanguageState: String by mutableStateOf("")
 }
