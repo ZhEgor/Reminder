@@ -3,7 +3,10 @@ package com.zhiroke.reminder.feature_words.presentation.screens.categories
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -19,7 +22,6 @@ import com.zhiroke.reminder.feature_words.presentation.screens.categories.compon
 import com.zhiroke.reminder.feature_words.presentation.screens.categories.components.TabRowWrapper
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.CreateWordScreen
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
@@ -30,18 +32,16 @@ fun CategoriesScreen(
 ) {
     val state = viewModel.state
     val coroutineScope = rememberCoroutineScope()
-    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed)
-    )
-    BottomSheetScaffold(
-        scaffoldState = bottomSheetScaffoldState,
+    val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+
+    ModalBottomSheetLayout(
+        sheetState = bottomSheetState,
         sheetContent = {
             Timber.d("sheetContent")
             CreateWordScreen(navController = navController)
 //            navController.navigate(Screen.CreateWordScreen.route)
         },
-        sheetShape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
-        sheetPeekHeight = 0.dp
+        sheetShape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
     ) {
         Timber.d("content")
         Box(
@@ -72,8 +72,8 @@ fun CategoriesScreen(
                     .padding(8.dp),
                 onClick = {
                     coroutineScope.launch {
-                        if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
-                            bottomSheetScaffoldState.bottomSheetState.expand()
+                        if (!bottomSheetState.isVisible) {
+                            bottomSheetState.animateTo(ModalBottomSheetValue.Expanded)
                         }
 //                    navController.navigate(Screen.CreateWordScreen.route)
                     }
