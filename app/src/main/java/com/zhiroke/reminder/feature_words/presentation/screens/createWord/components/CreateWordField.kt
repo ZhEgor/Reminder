@@ -1,13 +1,19 @@
 package com.zhiroke.reminder.feature_words.presentation.screens.createWord.components
 
+import androidx.compose.animation.core.animateOffset
+import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.ContentPaste
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
@@ -23,10 +29,22 @@ import com.zhiroke.reminder.R
 fun CreateWordField(
     value: String,
     title: String,
-    hint: String = title,
+    hasError: Boolean = false,
     onValueChange: (String) -> Unit
 ) {
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
+    var isFocused by remember { mutableStateOf(false) }
+    var labelPosition by remember {
+        if (value.isEmpty()) mutableStateOf(LabelPosition.HintPosition)
+        else mutableStateOf(LabelPosition.LabelPosition)
+    }
+    val transition = updateTransition(targetState = labelPosition, label = "label transition")
+    val labelOffset by transition.animateOffset(label = "Label transition") { position ->
+        when (position) {
+            LabelPosition.LabelPosition -> Offset(0F, 0F)
+            LabelPosition.HintPosition -> Offset(0F, 36F)
+        }
+    }
     Column {
         Box(
             modifier = Modifier
@@ -35,14 +53,18 @@ fun CreateWordField(
             contentAlignment = Alignment.Center
         ) {
             Box(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .offset(x = labelOffset.x.dp, y = labelOffset.y.dp)
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
                     text = title,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = if (labelPosition == LabelPosition.HintPosition) FontWeight.Normal else FontWeight.Bold,
+                    fontSize = if (labelPosition == LabelPosition.HintPosition) 20.sp else 16.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
+                    color = if (hasError) MaterialTheme.colors.error else MaterialTheme.colors.onSurface,
                 )
             }
             Box(
@@ -50,11 +72,11 @@ fun CreateWordField(
                 contentAlignment = Alignment.CenterEnd,
             ) {
                 TextButton(
-                    modifier = Modifier
-                        .padding(0.dp)
-                        .padding(0.dp),
                     onClick = {
-                        onValueChange(clipboardManager.getText()?.text ?: "")
+                        (clipboardManager.getText()?.text ?: "").let {
+                            if (it.isNotEmpty()) labelPosition = LabelPosition.LabelPosition
+                            onValueChange(it)
+                        }
                     },
                     shape = CircleShape
                 ) {
@@ -67,26 +89,67 @@ fun CreateWordField(
                 }
             }
         }
-        TransparentHintTextField(
+        Row(
             modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                 .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-            text = value,
-            hint = hint,
-            textStyle = TextStyle(fontSize = 18.sp)
+                .wrapContentHeight(),
+
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            onValueChange(it)
+
+            Box(
+                Modifier
+                    .weight(1f)
+            ) {
+                TransparentHintTextField(
+                    text = value,
+                    textStyle = TextStyle(fontSize = 18.sp),
+                    onFocusChange = {
+                        isFocused = it.isFocused
+                        labelPosition =
+                            if (!it.isFocused && value.isEmpty()) LabelPosition.HintPosition
+                            else LabelPosition.LabelPosition
+                    }
+                ) {
+                    onValueChange(it)
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 21.dp),
+            ) {
+                if (value.isNotEmpty()) {
+                    Icon(
+                        modifier = Modifier
+                            .size(20.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                onValueChange("")
+                                labelPosition = if (isFocused) LabelPosition.LabelPosition
+                                else LabelPosition.HintPosition
+                            },
+                        imageVector = Icons.Filled.Cancel,
+                        contentDescription = "remove text",
+                        tint = if (hasError) MaterialTheme.colors.error else MaterialTheme.colors.onSurface
+                    )
+                }
+            }
         }
         Divider(
-            color = MaterialTheme.colors.onSurface,
+            color = if (hasError) MaterialTheme.colors.error else MaterialTheme.colors.onSurface,
             thickness = 1.dp,
         )
     }
 }
 
+private enum class LabelPosition {
+    HintPosition,
+    LabelPosition
+}
+
 @Preview
 @Composable
 fun PreviewCreateWordField() {
-    CreateWordField(title = "Spelling", value = "smth", onValueChange = { })
+    CreateWordField(title = "Spelling", value = "test", onValueChange = { })
 }

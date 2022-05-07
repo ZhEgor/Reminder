@@ -33,13 +33,13 @@ class ValidationEditTextUseCaseTest {
 //
 //    @Test
 //    fun `translation is blank`() {
-//        val result = validationEditTextUseCase.validateTranslation("     ")
+//        val result = validationEditTextUseCase.isValidTranslation("     ")
 //        assertThat(result).isFalse()
 //    }
 //
 //    @Test
 //    fun `translation is empty`() {
-//        val result = validationEditTextUseCase.validateTranslation("")
+//        val result = validationEditTextUseCase.isValidTranslation("")
 //        assertThat(result).isFalse()
 //    }
 

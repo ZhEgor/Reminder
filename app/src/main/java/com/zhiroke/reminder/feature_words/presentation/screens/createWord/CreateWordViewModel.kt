@@ -40,12 +40,18 @@ class CreateWordViewModelImpl(
 
     override fun onEvent(event: CreateWordEvent) {
         when (event) {
-            CreateWordEvent.AddWord -> {
+            is CreateWordEvent.AddWord -> {
                 addNewWord(
-                    spelling = uiState.spellingState,
-                    translation = uiState.translationState,
-                    pronunciation = uiState.pronunciationState,
-                    categoryId = uiState.selectedCategory?.id
+                    spelling = event.spelling,
+                    translation = event.translation,
+                    pronunciation = event.pronunciation,
+                    categoryId = event.category?.id
+                )
+            }
+            is CreateWordEvent.AddCategory -> {
+                addNewCategory(
+                    name = event.categoryName,
+                    language = event.language
                 )
             }
             is CreateWordEvent.FindCategories -> {
@@ -70,9 +76,20 @@ class CreateWordViewModelImpl(
         pronunciation: String,
         categoryId: String?
     ) {
-        if (!validateFieldsSpelling(spelling)) return
-        if (!validateFieldsTranslation(translation)) return
-        if (categoryId == null) return
+        var isFieldsValid = true
+        if (!ValidationEditTextUseCase.isValidSpelling(spelling)) {
+            uiState.spellingState = uiState.spellingState.copy(hasError = true)
+            isFieldsValid = false
+        }
+        if (!ValidationEditTextUseCase.isValidTranslation(translation)) {
+            uiState.translationState = uiState.translationState.copy(hasError = true)
+            isFieldsValid = false
+        }
+        if (categoryId == null) {
+            uiState.categoryFieldState = uiState.categoryFieldState.copy(hasError = true)
+            isFieldsValid = false
+        }
+        if (!isFieldsValid) return
         viewModelScope.launch(Dispatchers.IO) {
             wordUseCase.addWord(
                 Word(
@@ -80,7 +97,7 @@ class CreateWordViewModelImpl(
                     spelling = spelling,
                     translation = translation,
                     pronunciation = pronunciation,
-                    categoryId = categoryId,
+                    categoryId = categoryId!!,
                     creationDate = System.currentTimeMillis().toString(),
                     lastShowDate = "",
                     complexity = 1,
@@ -90,14 +107,24 @@ class CreateWordViewModelImpl(
             categories.find { category -> category.id == categoryId }?.let { category ->
                 updateCategory(category)
             }
+            uiState.spellingState = uiState.spellingState.copy(text = "")
+            uiState.translationState = uiState.translationState.copy(text = "")
+            uiState.pronunciationState = uiState.pronunciationState.copy(text = "")
             state = state.copy(isLoading = false)
-            uiState.spellingState = ""
-            uiState.translationState = ""
-            uiState.pronunciationState = ""
         }
     }
 
     private fun addNewCategory(name: String, language: String) {
+        var isFieldsValid = true
+        if (!ValidationEditTextUseCase.isValidCategoryName(name)) {
+            uiState.categoryNameState = uiState.categoryNameState.copy(hasError = true)
+            isFieldsValid = false
+        }
+        if (!ValidationEditTextUseCase.isValidLanguage(language)) {
+            uiState.categoryLanguageState = uiState.categoryLanguageState.copy(hasError = true)
+            isFieldsValid = false
+        }
+        if (!isFieldsValid) return
         viewModelScope.launch(Dispatchers.IO) {
             state = state.copy(isLoading = true)
             val newCategory = Category(
@@ -107,6 +134,9 @@ class CreateWordViewModelImpl(
                 lastInteractedTime = System.currentTimeMillis().toString(),
             )
             categoryUseCase.addCategory(newCategory)
+            uiState.isCreateCategoryDialogActive = false
+            uiState.categoryNameState = uiState.categoryNameState.copy(text = "")
+            uiState.categoryLanguageState = uiState.categoryLanguageState.copy(text = "")
             state = state.copy(isLoading = false)
         }
     }
@@ -125,17 +155,9 @@ class CreateWordViewModelImpl(
         getCategoriesJob?.cancel()
         getCategoriesJob = categoryUseCase.loadCategories().onEach { categories ->
             this.categories = categories
-            uiState.selectedCategory = categories.firstOrNull()
-            findCategories(uiState.categorySearchFieldState)
+            uiState.categoryFieldState = uiState.categoryFieldState.copy(category = categories.firstOrNull())
+            findCategories(uiState.categorySearchFieldState.text)
             state = state.copy(isLoading = false)
         }.launchIn(viewModelScope)
-    }
-
-    private fun validateFieldsSpelling(spelling: String): Boolean {
-        return ValidationEditTextUseCase.validateSpelling(spelling)
-    }
-
-    private fun validateFieldsTranslation(translation: String): Boolean {
-        return ValidationEditTextUseCase.validateTranslation(translation)
     }
 }

@@ -29,7 +29,10 @@ fun CreateWordScreen(
     val uiState = viewModel.uiState
     val scrollState = rememberScrollState()
     val isSelectCategoryDialogActive = remember { mutableStateOf(false) }
+
     SelectCategoryDialog(isDialogActive = isSelectCategoryDialogActive, viewModel = viewModel)
+    CreateCategoryDialog(viewModel = viewModel)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,27 +49,42 @@ fun CreateWordScreen(
         Text(text = stringResource(R.string.word_creator), style = MaterialTheme.typography.h5)
         CreateWordField(
             title = stringResource(R.string.spelling),
-            value = uiState.spellingState,
-            onValueChange = { uiState.spellingState = it }
-        )
+            value = uiState.spellingState.text,
+            hasError = uiState.spellingState.hasError
+        ) {
+            uiState.spellingState = uiState.spellingState.copy(text = it, hasError = false)
+        }
         CreateWordField(
             title = stringResource(R.string.translation),
-            value = uiState.translationState,
-            onValueChange = { uiState.translationState = it }
-        )
+            value = uiState.translationState.text,
+            hasError = uiState.translationState.hasError
+        ) {
+            uiState.translationState = uiState.translationState.copy(text = it, hasError = false)
+        }
         CreateWordField(
             title = stringResource(R.string.pronunciation),
-            value = uiState.pronunciationState,
-            onValueChange = { uiState.pronunciationState = it }
-        )
-        SelectCategoryField(text = viewModel.uiState.selectedCategory?.name) {
+            value = uiState.pronunciationState.text,
+            hasError = uiState.pronunciationState.hasError
+        ) {
+            uiState.pronunciationState = uiState.pronunciationState.copy(text = it, hasError = false)
+        }
+        SelectCategoryField(text = uiState.categoryFieldState.category?.name) {
             isSelectCategoryDialogActive.value = true
         }
         Button(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp, vertical = 32.dp),
-            onClick = { viewModel.onEvent(CreateWordEvent.AddWord) }
+            onClick = {
+                viewModel.onEvent(
+                    CreateWordEvent.AddWord(
+                        spelling = uiState.spellingState.text,
+                        translation = uiState.translationState.text,
+                        pronunciation = uiState.pronunciationState.text,
+                        category = uiState.categoryFieldState.category
+                    )
+                )
+            }
         ) {
             Text(text = stringResource(R.string.add), style = MaterialTheme.typography.h6)
         }

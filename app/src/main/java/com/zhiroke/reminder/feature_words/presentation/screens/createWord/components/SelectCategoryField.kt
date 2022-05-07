@@ -20,7 +20,11 @@ import com.zhiroke.reminder.R
 import com.zhiroke.reminder.ui.theme.Black40
 
 @Composable
-fun SelectCategoryField(text: String?, onClick: () -> Unit) {
+fun SelectCategoryField(
+    text: String?,
+    hasError: Boolean = false,
+    onClick: () -> Unit
+) {
     Column(
         modifier = Modifier.clickable {
             onClick()
@@ -31,7 +35,8 @@ fun SelectCategoryField(text: String?, onClick: () -> Unit) {
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
             text = stringResource(R.string.category),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = if (hasError) MaterialTheme.colors.error else MaterialTheme.colors.onSurface
         )
         Text(
             modifier = Modifier
@@ -43,7 +48,7 @@ fun SelectCategoryField(text: String?, onClick: () -> Unit) {
             overflow = TextOverflow.Ellipsis
         )
         Divider(
-            color = MaterialTheme.colors.onSurface,
+            color = if (hasError) MaterialTheme.colors.error else MaterialTheme.colors.onSurface,
             thickness = 1.dp,
         )
     }
@@ -52,7 +57,7 @@ fun SelectCategoryField(text: String?, onClick: () -> Unit) {
 @Preview
 @Composable
 fun PreviewSelectCategoryField() {
-    SelectCategoryField(text = null) {
+    SelectCategoryField(text = null, hasError = true) {
 
     }
 }

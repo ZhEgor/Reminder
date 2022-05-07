@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 /** Common colors */
 val Black = Color(0xFF121212)
 val White = Color(0xFFFFFFFF)
-val Red = Color(0xFFED0E00)
+val ErrorRed = Color(0xFFB00020)
 
 
 val DarkGray = Color(0xFF202020)

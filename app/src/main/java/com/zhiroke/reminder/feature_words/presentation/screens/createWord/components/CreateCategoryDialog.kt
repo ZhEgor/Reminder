@@ -8,24 +8,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.zhiroke.reminder.R
+import com.zhiroke.reminder.feature_words.presentation.screens.createWord.CreateWordEvent
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.CreateWordViewModel
 
 @Composable
-fun CreateCategoryDialog(
-    isDialogActive: MutableState<Boolean>,
-    viewModel: CreateWordViewModel
-) {
+fun CreateCategoryDialog(viewModel: CreateWordViewModel) {
     val uiState = viewModel.uiState
 
-    if (isDialogActive.value) {
-        Dialog(onDismissRequest = { isDialogActive.value = false }) {
+    if (uiState.isCreateCategoryDialogActive) {
+        Dialog(onDismissRequest = { uiState.isCreateCategoryDialogActive = false }) {
             Surface(
                 modifier = Modifier
                     .width(300.dp)
@@ -46,9 +43,10 @@ fun CreateCategoryDialog(
                         style = MaterialTheme.typography.h5
                     )
                     OutlinedTextField(
-                        value = uiState.categoryNameState,
+                        value = uiState.categoryNameState.text,
                         onValueChange = {
-                            uiState.categoryNameState = it
+                            uiState.categoryNameState =
+                                uiState.categoryNameState.copy(text = it, hasError = false)
                         },
                         label = {
                             Text(text = stringResource(id = R.string.category_name))
@@ -57,13 +55,15 @@ fun CreateCategoryDialog(
                             focusedLabelColor = MaterialTheme.colors.primaryVariant,
                             focusedBorderColor = MaterialTheme.colors.primaryVariant,
                             cursorColor = MaterialTheme.colors.primaryVariant
-                        )
-
+                        ),
+                        singleLine = true,
+                        isError = uiState.categoryNameState.hasError
                     )
                     OutlinedTextField(
-                        value = uiState.categoryNameState,
+                        value = uiState.categoryLanguageState.text,
                         onValueChange = {
-                            uiState.categoryNameState = it
+                            uiState.categoryLanguageState =
+                                uiState.categoryLanguageState.copy(text = it, hasError = false)
                         },
                         label = {
                             Text(text = stringResource(id = R.string.language))
@@ -72,7 +72,9 @@ fun CreateCategoryDialog(
                             focusedLabelColor = MaterialTheme.colors.primaryVariant,
                             focusedBorderColor = MaterialTheme.colors.primaryVariant,
                             cursorColor = MaterialTheme.colors.primaryVariant
-                        )
+                        ),
+                        singleLine = true,
+                        isError = uiState.categoryLanguageState.hasError
                     )
                     Row(
                         modifier = Modifier
@@ -85,7 +87,7 @@ fun CreateCategoryDialog(
                                 .weight(1f)
                                 .wrapContentHeight()
                                 .padding(horizontal = 4.dp),
-                            onClick = { isDialogActive.value = false },
+                            onClick = { uiState.isCreateCategoryDialogActive = false },
                             border = BorderStroke(
                                 width = 1.dp,
                                 color = MaterialTheme.colors.primaryVariant
@@ -111,7 +113,14 @@ fun CreateCategoryDialog(
                                 .weight(1f)
                                 .wrapContentHeight()
                                 .padding(horizontal = 4.dp),
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                viewModel.onEvent(
+                                    CreateWordEvent.AddCategory(
+                                        categoryName = uiState.categoryNameState.text,
+                                        language = uiState.categoryLanguageState.text
+                                    )
+                                )
+                            },
                             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
                         ) {
                             Row(

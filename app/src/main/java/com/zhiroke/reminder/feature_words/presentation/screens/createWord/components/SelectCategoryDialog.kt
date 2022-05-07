@@ -12,8 +12,6 @@ import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -30,9 +28,7 @@ fun SelectCategoryDialog(
     viewModel: CreateWordViewModel
 ) {
     val uiState = viewModel.uiState
-    val isCreateCategoryDialogActive = remember { mutableStateOf(false) }
 
-    CreateCategoryDialog(isDialogActive = isCreateCategoryDialogActive, viewModel = viewModel)
     if (isDialogActive.value) {
         Dialog(onDismissRequest = { isDialogActive.value = false }) {
             Surface(
@@ -49,14 +45,21 @@ fun SelectCategoryDialog(
                         .padding(8.dp)
                 ) {
                     OutlinedTextField(
-                        value = uiState.categorySearchFieldState,
+                        value = uiState.categorySearchFieldState.text,
                         onValueChange = {
                             viewModel.onEvent(CreateWordEvent.FindCategories(it))
-                            uiState.categorySearchFieldState = it
+                            uiState.categorySearchFieldState =
+                                uiState.categorySearchFieldState.copy(text = it)
                         },
                         trailingIcon = {
-                            if (uiState.categorySearchFieldState.isNotEmpty()) {
-                                IconButton(onClick = { uiState.categorySearchFieldState = "" }) {
+                            if (uiState.categorySearchFieldState.text.isNotEmpty()) {
+                                IconButton(onClick = {
+                                    uiState.categorySearchFieldState =
+                                        uiState.categorySearchFieldState.copy(text = "")
+                                    viewModel.onEvent(
+                                        CreateWordEvent.FindCategories(uiState.categorySearchFieldState.text)
+                                    )
+                                }) {
                                     Icon(
                                         imageVector = Icons.Filled.Cancel,
                                         contentDescription = "remove text"
@@ -65,9 +68,13 @@ fun SelectCategoryDialog(
                             }
                         },
                         leadingIcon = {
-                            IconButton(onClick = {
-                                viewModel.onEvent(CreateWordEvent.FindCategories(uiState.categorySearchFieldState))
-                            }) {
+                            IconButton(
+                                onClick = {
+                                    viewModel.onEvent(
+                                        CreateWordEvent.FindCategories(uiState.categorySearchFieldState.text)
+                                    )
+                                }
+                            ) {
                                 Icon(
                                     imageVector = Icons.Default.Search,
                                     contentDescription = "Search by text"
@@ -78,7 +85,8 @@ fun SelectCategoryDialog(
                             focusedLabelColor = MaterialTheme.colors.primaryVariant,
                             focusedBorderColor = MaterialTheme.colors.primaryVariant,
                             cursorColor = MaterialTheme.colors.primaryVariant
-                        )
+                        ),
+                        singleLine = true
                     )
                     LazyColumn(
                         modifier = Modifier
@@ -92,7 +100,7 @@ fun SelectCategoryDialog(
                                     .padding(horizontal = 4.dp, vertical = 2.dp)
                                     .clip(RoundedCornerShape(4.dp))
                                     .clickable {
-                                        isCreateCategoryDialogActive.value = true
+                                        uiState.isCreateCategoryDialogActive = true
                                         isDialogActive.value = false
                                     }
                                     .border(
@@ -117,8 +125,11 @@ fun SelectCategoryDialog(
                                     .clip(RoundedCornerShape(4.dp))
                                     .background(MaterialTheme.colors.primaryVariant)
                                     .clickable {
-                                        uiState.selectedCategory =
-                                            uiState.resultCategoriesState[position]
+                                        uiState.categoryFieldState =
+                                            uiState.categoryFieldState.copy(
+                                                category = uiState.resultCategoriesState[position],
+                                                hasError = false
+                                            )
                                         isDialogActive.value = false
                                     }
                             ) {

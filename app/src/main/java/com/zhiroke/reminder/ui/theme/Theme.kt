@@ -26,7 +26,7 @@ private val LightColorPalette = lightColors(
     onBackground = Black60,
     surface = GhostWhite,
     onSurface = Black60,
-    error = Red,
+    error = ErrorRed,
     onError = GhostWhite
 )
 
