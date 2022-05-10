@@ -1,14 +1,14 @@
 package com.zhiroke.reminder.feature_words.presentation
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import com.zhiroke.reminder.feature_words.presentation.util.navigation.Navigation
 import com.zhiroke.reminder.ui.theme.ReminderTheme
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     private var lastOnBackPressed: Long = 0
 

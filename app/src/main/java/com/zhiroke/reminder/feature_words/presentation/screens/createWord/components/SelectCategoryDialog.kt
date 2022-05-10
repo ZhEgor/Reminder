@@ -12,9 +12,13 @@ import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -117,32 +121,61 @@ fun SelectCategoryDialog(
                                 )
                             }
                         }
-                        items(uiState.resultCategoriesState.size) { position ->
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 4.dp, vertical = 2.dp)
-                                    .clip(RoundedCornerShape(4.dp))
-                                    .background(MaterialTheme.colors.primaryVariant)
-                                    .clickable {
-                                        uiState.categoryFieldState =
-                                            uiState.categoryFieldState.copy(
-                                                category = uiState.resultCategoriesState[position],
-                                                hasError = false
-                                            )
-                                        isDialogActive.value = false
-                                    }
-                            ) {
-                                Text(
-                                    modifier = Modifier.padding(4.dp),
-                                    text = uiState.resultCategoriesState[position].name,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
+                        if (uiState.resultCategoriesState.isNotEmpty()) {
+                            items(uiState.resultCategoriesState.size) { position ->
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 4.dp, vertical = 2.dp)
+                                        .clip(RoundedCornerShape(4.dp))
+                                        .background(MaterialTheme.colors.primaryVariant)
+                                        .clickable {
+                                            uiState.categoryFieldState =
+                                                uiState.categoryFieldState.copy(
+                                                    category = uiState.resultCategoriesState[position],
+                                                    hasError = false
+                                                )
+                                            isDialogActive.value = false
+                                        }
+                                ) {
+                                    Text(
+                                        modifier = Modifier.padding(4.dp),
+                                        text = uiState.resultCategoriesState[position].name,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+                            }
+                        } else {
+                            item {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(vertical = 88.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+                                    Icon(
+                                        modifier = Modifier.size(
+                                            width = 150.dp,
+                                            height = 100.dp
+                                        ),
+                                        painter = painterResource(id = R.drawable.ic_no_search_result),
+                                        contentDescription = "no search result",
+                                        tint = Color.Unspecified
+                                    )
+                                    Text(
+                                        modifier = Modifier.width(200.dp),
+                                        text = stringResource(R.string.no_search_result_state),
+                                        textAlign = TextAlign.Center,
+                                    )
+                                }
+
                             }
                         }
                     }
                 }
+
             }
         }
     }

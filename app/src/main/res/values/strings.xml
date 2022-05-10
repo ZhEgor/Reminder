@@ -31,4 +31,6 @@
     <string name="delete_word_warning">Are you sure you want to delete the word</string>
     <string name="no_changes_found">No changes found</string>
     <string name="paste_from_clipboard">paste from clipboard</string>
+    <string name="no_words_state">This category seems to be empty, but you can add new words here.</string>
+    <string name="no_search_result_state">Unfortunately, I couldn\'t find anything.</string>
 </resources>
