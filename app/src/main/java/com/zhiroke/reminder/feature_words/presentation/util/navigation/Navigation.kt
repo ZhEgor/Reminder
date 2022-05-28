@@ -1,13 +1,17 @@
 package com.zhiroke.reminder.feature_words.presentation.util.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.zhiroke.reminder.feature_words.presentation.screens.categories.CategoriesScreen
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.CreateWordScreen
+import com.zhiroke.reminder.feature_words.presentation.screens.wordList.WordListScreen
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -21,6 +25,21 @@ fun Navigation() {
             CategoriesScreen(
                 navController = navController,
                 viewModel = getViewModel()
+            )
+        }
+        composable(
+            route = Screen.WordListScreen.route + "/{categoryId}",
+            arguments = listOf(
+                navArgument("categoryId") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                    nullable = false
+                }
+            )
+        ) { entry ->
+            WordListScreen(
+                navController = navController,
+                viewModel = getViewModel(parameters = { parametersOf(entry.arguments?.get("categoryId")) })
             )
         }
         composable(route = Screen.CreateWordScreen.route) {

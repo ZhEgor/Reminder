@@ -22,10 +22,6 @@ class WordRoomRepository(
         return wordDao.deleteWords(words)
     }
 
-    override suspend fun fetchWords(): Flow<List<Word>> {
-        return wordDao.readAllWords()
-    }
-
     override suspend fun fetchWordsFromPosition(categoryId: String, position: Int, limit: Int): Result<List<Word>> {
         return Result.success(wordDao.readWordsFromPosition(categoryId, position, limit))
     }

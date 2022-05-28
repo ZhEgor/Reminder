@@ -12,9 +12,6 @@ import kotlinx.coroutines.launch
 abstract class CategoriesViewModel : BaseViewModel() {
 
     abstract val state: CategoriesState
-
-    abstract fun loadCategories()
-    abstract fun navigateToCreateWord()
 }
 
 class CategoriesViewModelImpl(
@@ -27,15 +24,11 @@ class CategoriesViewModelImpl(
         loadCategories()
     }
 
-    override fun loadCategories() {
+    private fun loadCategories() {
         viewModelScope.launch(Dispatchers.IO) {
             loadCategories.invoke().collect { categories ->
                 state = state.copy(isLoading = false, categories = categories)
             }
         }
-    }
-
-    override fun navigateToCreateWord() {
-
     }
 }

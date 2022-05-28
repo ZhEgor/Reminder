@@ -18,9 +18,6 @@ interface WordDao {
     @Query("SELECT * FROM ${WordTableConst.TABLE_NAME} ORDER BY ${WordTableConst.CREATION_DATE} DESC")
     fun readAllWords(): Flow<List<Word>>
 
-    @Query("SELECT * FROM ${WordTableConst.TABLE_NAME} ORDER BY ${WordTableConst.CREATION_DATE} DESC")
-    fun readAllWordsLiveData(): LiveData<List<Word>>
-
     @Query("SELECT * FROM ${WordTableConst.TABLE_NAME} WHERE ${WordTableConst.CATEGORY_ID}=:categoryId ORDER BY ${WordTableConst.CREATION_DATE} DESC LIMIT :limit OFFSET :position")
     fun readWordsFromPosition(categoryId: String, position: Int, limit: Int): List<Word>
 

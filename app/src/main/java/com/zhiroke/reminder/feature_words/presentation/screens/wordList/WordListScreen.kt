@@ -29,7 +29,7 @@ fun WordListScreen(
 ) {
     val state = viewModel.state
 
-    if (state.words.isEmpty()) {
+    if (state.words.value.isEmpty()) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -49,13 +49,13 @@ fun WordListScreen(
         }
     } else {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.words.size) { position ->
-                if (position >= state.words.size - 5 && !state.endReached && !state.isLoading) {
+            items(state.words.value.size) { position ->
+                if (position >= state.words.value.size - 5 && !state.endReached.value && !state.isLoading.value) {
                     viewModel.loadWordsNextWords()
                 }
                 WordListItem(
                     position = position + 1,
-                    word = state.words[position],
+                    word = state.words.value[position],
                     modifier = Modifier
                         .padding(4.dp) // margin
                         .padding(4.dp) // padding
@@ -68,7 +68,7 @@ fun WordListScreen(
                 )
             }
             item {
-                if (state.isLoading) {
+                if (state.isLoading.value) {
                     Row(
                         modifier = Modifier
                             .fillMaxSize()

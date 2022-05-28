@@ -22,7 +22,6 @@ import com.zhiroke.reminder.feature_words.presentation.screens.categories.compon
 import com.zhiroke.reminder.feature_words.presentation.screens.categories.components.TabRowWrapper
 import com.zhiroke.reminder.feature_words.presentation.screens.createWord.CreateWordScreen
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
@@ -32,18 +31,16 @@ fun CategoriesScreen(
 ) {
     val state = viewModel.state
     val coroutineScope = rememberCoroutineScope()
-    val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val bottomSheetState =
+        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetContent = {
-            Timber.d("sheetContent")
             CreateWordScreen(navController = navController)
-//            navController.navigate(Screen.CreateWordScreen.route)
         },
         sheetShape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
     ) {
-        Timber.d("content")
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -75,7 +72,6 @@ fun CategoriesScreen(
                         if (!bottomSheetState.isVisible) {
                             bottomSheetState.animateTo(ModalBottomSheetValue.Expanded)
                         }
-//                    navController.navigate(Screen.CreateWordScreen.route)
                     }
                 }
             )
