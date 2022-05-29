@@ -1,10 +1,6 @@
 package com.zhiroke.reminder.useCase
 
 //import com.google.common.truth.Truth.assertThat
-import com.zhiroke.reminder.feature_words.domain.use_case.ValidationEditTextUseCase
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
 
 class ValidationEditTextUseCaseTest {
 

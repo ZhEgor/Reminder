@@ -1,16 +1,16 @@
 package com.zhiroke.reminder.di.modules
 
 import androidx.room.Room
-import com.zhiroke.reminder.feature_words.domain.const.db.WordDBConst
-import com.zhiroke.reminder.feature_words.domain.repository.category.CategoryEditor
-import com.zhiroke.reminder.feature_words.domain.repository.category.CategoryFetcher
-import com.zhiroke.reminder.feature_words.domain.repository.word.WordEditor
-import com.zhiroke.reminder.feature_words.domain.repository.word.WordFetcher
-import com.zhiroke.reminder.feature_words.data.repository.room.CategoryRoomRepository
-import com.zhiroke.reminder.feature_words.data.repository.room.WordRoomRepository
-import com.zhiroke.reminder.feature_words.data.data_source.dao.CategoryDao
-import com.zhiroke.reminder.feature_words.data.data_source.dao.WordDao
-import com.zhiroke.reminder.feature_words.data.data_source.database.WordDatabase
+import com.zhiroke.reminder.featurewords.domain.const.db.WordDBConst
+import com.zhiroke.reminder.featurewords.domain.repository.category.CategoryEditor
+import com.zhiroke.reminder.featurewords.domain.repository.category.CategoryFetcher
+import com.zhiroke.reminder.featurewords.domain.repository.word.WordEditor
+import com.zhiroke.reminder.featurewords.domain.repository.word.WordFetcher
+import com.zhiroke.reminder.featurewords.data.repository.room.CategoryRoomRepository
+import com.zhiroke.reminder.featurewords.data.repository.room.WordRoomRepository
+import com.zhiroke.reminder.featurewords.data.datasource.dao.CategoryDao
+import com.zhiroke.reminder.featurewords.data.datasource.dao.WordDao
+import com.zhiroke.reminder.featurewords.data.datasource.database.WordDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

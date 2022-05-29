@@ -1,24 +1,12 @@
 package com.zhiroke.reminder.data.repository.room
 
 //import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.zhiroke.reminder.feature_words.domain.model.Word
-import com.zhiroke.reminder.feature_words.data.data_source.dao.CategoryDao
-import com.zhiroke.reminder.feature_words.data.data_source.dao.WordDao
-import com.zhiroke.reminder.feature_words.data.data_source.database.WordDatabase
-import com.zhiroke.reminder.getOrAwaitValue
 //import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 //import kotlinx.coroutines.test.runBlockingTest
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
