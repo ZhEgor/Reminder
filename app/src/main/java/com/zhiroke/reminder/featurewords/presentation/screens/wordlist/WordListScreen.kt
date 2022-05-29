@@ -20,6 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.zhiroke.reminder.R
+import com.zhiroke.reminder.core.presentation.components.animatedShimmerBrush
+import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.ShimmeringWordListItem
 import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.WordListItem
 
 @Composable
@@ -29,7 +31,61 @@ fun WordListScreen(
 ) {
     val state = viewModel.state
 
-    if (state.words.value.isEmpty()) {
+
+    if (state.words.value.isNotEmpty()) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(state.words.value.size) { position ->
+                if (position >= state.words.value.size - 5 && !state.endReached.value && !state.isPageLoading.value) {
+                    viewModel.loadWordsNextWords()
+                }
+                WordListItem(
+                    modifier = Modifier
+                        .padding(4.dp) // margin
+                        .padding(4.dp) // padding
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(MaterialTheme.colors.primary)
+                        .clickable {
+
+                        },
+                    position = position + 1,
+                    word = state.words.value[position]
+                )
+            }
+            item {
+                if (state.isPageLoading.value) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(8.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+            }
+        }
+    } else if (state.isLoading.value) {
+        val brush = animatedShimmerBrush(
+            shimmerColors = listOf(
+                MaterialTheme.colors.primary.copy(alpha = 0.6f),
+                MaterialTheme.colors.primary.copy(alpha = 0.2f),
+                MaterialTheme.colors.primary.copy(alpha = 0.6f),
+            )
+        )
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(20) {
+                ShimmeringWordListItem(
+                    modifier = Modifier
+                        .height(42.dp)
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(brush)
+                )
+            }
+        }
+    } else {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -46,39 +102,6 @@ fun WordListScreen(
                 text = stringResource(R.string.no_words_state),
                 textAlign = TextAlign.Center,
             )
-        }
-    } else {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.words.value.size) { position ->
-                if (position >= state.words.value.size - 5 && !state.endReached.value && !state.isLoading.value) {
-                    viewModel.loadWordsNextWords()
-                }
-                WordListItem(
-                    position = position + 1,
-                    word = state.words.value[position],
-                    modifier = Modifier
-                        .padding(4.dp) // margin
-                        .padding(4.dp) // padding
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(4.dp))
-                        .background(MaterialTheme.colors.primary)
-                        .clickable {
-
-                        }
-                )
-            }
-            item {
-                if (state.isLoading.value) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(8.dp),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
-            }
         }
     }
 }

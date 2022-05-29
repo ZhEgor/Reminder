@@ -1,6 +1,5 @@
 package com.zhiroke.reminder.featurewords.presentation.screens.wordlist
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.zhiroke.reminder.core.presentation.base.BaseViewModel
 import com.zhiroke.reminder.core.presentation.util.DefaultPaginatorImpl
@@ -26,13 +25,11 @@ class WordListViewModelImpl(
     private val wordUseCase: WordUseCase
 ) : WordListViewModel() {
 
-    private val id: Int = (0..99999).random()
-
     private val paginator = DefaultPaginatorImpl(
         initialKey = START_POSITION,
         onLoadUpdated = {
             withContext(Dispatchers.Main) {
-                state.isLoading.value = it
+                state.isPageLoading.value = it
             }
         }, onRequest = { nextPosition ->
             wordUseCase.loadWordsFromPosition(category.id, nextPosition, PAGINATION_LIMIT)
@@ -44,11 +41,11 @@ class WordListViewModelImpl(
             state.words.value = state.words.value + words
             state.position.value = nextKey
             state.endReached.value = words.size < PAGINATION_LIMIT
+            state.isLoading.value = false
         }
     )
 
     init {
-        Log.d("tag", "idViewModel: $id")
         loadWordsNextWords()
         observerLastAddedWord()
     }
@@ -69,7 +66,7 @@ class WordListViewModelImpl(
 
     override fun updateWord(word: Word) {
         viewModelScope.launch(Dispatchers.IO) {
-            state.isLoading.value = true
+            state.isPageLoading.value = true
             val hasWordUpdated = wordUseCase.updateWord(word)
             if (hasWordUpdated) {
                 val words = state.words.value.map {
@@ -78,19 +75,19 @@ class WordListViewModelImpl(
                 }
                 state.words.value = words
             }
-            state.isLoading.value = false
+            state.isPageLoading.value = false
         }
     }
 
     override fun deleteWord(word: Word) {
         viewModelScope.launch(Dispatchers.IO) {
-            state.isLoading.value = true
+            state.isPageLoading.value = true
             val hasWordDeleted = wordUseCase.deleteWords(listOf(word))
             if (hasWordDeleted) {
                 val words = state.words.value.filterNot { it.id == word.id }
                 state.words.value = words
             }
-            state.isLoading.value = false
+            state.isPageLoading.value = false
         }
     }
 
