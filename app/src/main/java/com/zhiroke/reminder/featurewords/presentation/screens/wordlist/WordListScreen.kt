@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
@@ -23,6 +24,7 @@ import com.zhiroke.reminder.R
 import com.zhiroke.reminder.core.presentation.components.animatedShimmerBrush
 import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.ShimmeringWordListItem
 import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.WordListItem
+import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.WordListItemExpanded
 
 @Composable
 fun WordListScreen(
@@ -31,26 +33,46 @@ fun WordListScreen(
 ) {
     val state = viewModel.state
 
-
     if (state.words.value.isNotEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.words.value.size) { position ->
+            itemsIndexed(items = state.words.value) { position, word ->
                 if (position >= state.words.value.size - 5 && !state.endReached.value && !state.isPageLoading.value) {
                     viewModel.loadWordsNextWords()
                 }
-                WordListItem(
-                    modifier = Modifier
-                        .padding(4.dp) // margin
-                        .padding(4.dp) // padding
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(4.dp))
-                        .background(MaterialTheme.colors.primary)
-                        .clickable {
+                if (state.focusedWord.value?.id != word.id) {
+                    WordListItem(
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp, vertical = 6.dp)
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(MaterialTheme.colors.primary)
+                            .clickable {
+                                state.focusedWord.value = word
+                            },
+                        position = position + 1,
+                        word = word
+                    )
+                } else {
+                    WordListItemExpanded(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .padding(horizontal = 8.dp, vertical = 6.dp)
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(MaterialTheme.colors.primary)
+                            .clickable {
+                                state.focusedWord.value = null
+                            },
+                        word = word,
+                        position = position + 1,
+                        onSave = {
 
-                        },
-                    position = position + 1,
-                    word = state.words.value[position]
-                )
+                        }, onDelete = {
+
+                        }
+                    )
+                }
             }
             item {
                 if (state.isPageLoading.value) {
@@ -74,12 +96,12 @@ fun WordListScreen(
             )
         )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(20) {
+            items(30) {
                 ShimmeringWordListItem(
                     modifier = Modifier
                         .height(42.dp)
                         .fillMaxWidth()
-                        .padding(8.dp)
+                        .padding(horizontal = 8.dp, vertical = 6.dp)
                         .clip(RoundedCornerShape(4.dp))
                         .background(brush)
                 )

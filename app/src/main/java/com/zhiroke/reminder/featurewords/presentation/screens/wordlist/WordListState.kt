@@ -10,5 +10,6 @@ data class WordListState(
     var error: MutableState<String?> = mutableStateOf(null),
     var isPageLoading: MutableState<Boolean> = mutableStateOf(false),
     var endReached: MutableState<Boolean> = mutableStateOf(false),
-    var position: MutableState<Int> = mutableStateOf(0)
+    var position: MutableState<Int> = mutableStateOf(0),
+    var focusedWord: MutableState<Word?> = mutableStateOf(null)
 )
