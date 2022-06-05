@@ -33,4 +33,15 @@
     <string name="paste_from_clipboard">paste from clipboard</string>
     <string name="no_words_state">This category seems to be empty, but you can add new words here.</string>
     <string name="no_search_result_state">Unfortunately, I couldn\'t find anything.</string>
+    <string name="date_format">dd.MM.yyyy,  hh:mma</string>
+    <string name="delete">Delete</string>
+    <string name="delete_word_description">delete word</string>
+    <string name="save">Save</string>
+    <string name="save_word_description">save word</string>
+    <string name="cancel_category_creation_description">cancel category creation</string>
+    <string name="create_new_category_description">create new category</string>
+    <string name="yes_description">yes</string>
+    <string name="no_description">no</string>
+    <string name="delete_title">Are you sure, you want to delete word \"%1$s\"</string>
+    <string name="save_title">Are you sure, you want to save your changes?</string>
 </resources>

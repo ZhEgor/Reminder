@@ -7,9 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.zhiroke.reminder.core.presentation.base.BaseViewModel
 import com.zhiroke.reminder.featurewords.domain.model.Category
 import com.zhiroke.reminder.featurewords.domain.model.Word
-import com.zhiroke.reminder.featurewords.domain.usecase.ValidationEditTextUseCase
+import com.zhiroke.reminder.featurewords.domain.usecase.ValidationTextFieldUseCase
 import com.zhiroke.reminder.featurewords.domain.usecase.category.CategoryUseCase
 import com.zhiroke.reminder.featurewords.domain.usecase.word.WordUseCase
+import com.zhiroke.reminder.featurewords.domain.util.ext.formatField
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
@@ -42,16 +43,16 @@ class CreateWordViewModelImpl(
         when (event) {
             is CreateWordEvent.AddWord -> {
                 addNewWord(
-                    spelling = event.spelling,
-                    translation = event.translation,
-                    pronunciation = event.pronunciation,
+                    spelling = event.spelling.formatField(),
+                    translation = event.translation.formatField(),
+                    pronunciation = event.pronunciation.formatField(),
                     categoryId = event.category?.id
                 )
             }
             is CreateWordEvent.AddCategory -> {
                 addNewCategory(
-                    name = event.categoryName,
-                    language = event.language
+                    name = event.categoryName.formatField(),
+                    language = event.language.formatField()
                 )
             }
             is CreateWordEvent.FindCategories -> {
@@ -77,11 +78,11 @@ class CreateWordViewModelImpl(
         categoryId: String?
     ) {
         var isFieldsValid = true
-        if (!ValidationEditTextUseCase.isValidSpelling(spelling)) {
+        if (!ValidationTextFieldUseCase.isValidSpelling(spelling)) {
             uiState.spellingState = uiState.spellingState.copy(hasError = true)
             isFieldsValid = false
         }
-        if (!ValidationEditTextUseCase.isValidTranslation(translation)) {
+        if (!ValidationTextFieldUseCase.isValidTranslation(translation)) {
             uiState.translationState = uiState.translationState.copy(hasError = true)
             isFieldsValid = false
         }
@@ -116,11 +117,11 @@ class CreateWordViewModelImpl(
 
     private fun addNewCategory(name: String, language: String) {
         var isFieldsValid = true
-        if (!ValidationEditTextUseCase.isValidCategoryName(name)) {
+        if (!ValidationTextFieldUseCase.isValidCategoryName(name)) {
             uiState.categoryNameState = uiState.categoryNameState.copy(hasError = true)
             isFieldsValid = false
         }
-        if (!ValidationEditTextUseCase.isValidLanguage(language)) {
+        if (!ValidationTextFieldUseCase.isValidLanguage(language)) {
             uiState.categoryLanguageState = uiState.categoryLanguageState.copy(hasError = true)
             isFieldsValid = false
         }
@@ -155,7 +156,8 @@ class CreateWordViewModelImpl(
         getCategoriesJob?.cancel()
         getCategoriesJob = categoryUseCase.loadCategories().onEach { categories ->
             this.categories = categories
-            uiState.categoryFieldState = uiState.categoryFieldState.copy(category = categories.firstOrNull())
+            uiState.categoryFieldState =
+                uiState.categoryFieldState.copy(category = categories.firstOrNull())
             findCategories(uiState.categorySearchFieldState.text)
             state = state.copy(isLoading = false)
         }.launchIn(viewModelScope)

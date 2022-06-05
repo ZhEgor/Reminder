@@ -4,11 +4,11 @@ package com.zhiroke.reminder.useCase
 
 class ValidationEditTextUseCaseTest {
 
-//    private lateinit var validationEditTextUseCase: ValidationEditTextUseCase
+//    private lateinit var validationEditTextUseCase: ValidationTextFieldUseCase
 //
 //    @Before
 //    fun setup() {
-//        validationEditTextUseCase = ValidationEditTextUseCase()
+//        validationEditTextUseCase = ValidationTextFieldUseCase()
 //    }
 //
 //    @After

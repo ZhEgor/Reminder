@@ -1,6 +1,6 @@
 package com.zhiroke.reminder.featurewords.domain.usecase
 
-object ValidationEditTextUseCase {
+object ValidationTextFieldUseCase {
 
     fun isValidSpelling(spelling: String): Boolean {
         return spelling.isNotBlank()

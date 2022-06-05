@@ -5,7 +5,9 @@ import com.zhiroke.reminder.core.presentation.base.BaseViewModel
 import com.zhiroke.reminder.core.presentation.util.DefaultPaginatorImpl
 import com.zhiroke.reminder.featurewords.domain.model.Category
 import com.zhiroke.reminder.featurewords.domain.model.Word
+import com.zhiroke.reminder.featurewords.domain.usecase.ValidationTextFieldUseCase
 import com.zhiroke.reminder.featurewords.domain.usecase.word.WordUseCase
+import com.zhiroke.reminder.featurewords.domain.util.ext.cleanup
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -65,18 +67,42 @@ class WordListViewModelImpl(
     }
 
     override fun updateWord(word: Word) {
+        val cleanWord = word.cleanup()
+        if (!validateWord(cleanWord)) return
         viewModelScope.launch(Dispatchers.IO) {
             state.isPageLoading.value = true
-            val hasWordUpdated = wordUseCase.updateWord(word)
+            val hasWordUpdated = wordUseCase.updateWord(cleanWord)
             if (hasWordUpdated) {
                 val words = state.words.value.map {
-                    if (it.id == word.id) word
+                    if (it.id == cleanWord.id) cleanWord
                     else it
                 }
                 state.words.value = words
             }
             state.isPageLoading.value = false
         }
+    }
+
+    private fun validateWord(word: Word): Boolean {
+        var isValid = true
+        var hasSpellingError = false
+        var hasTranslationError = false
+
+        if (!ValidationTextFieldUseCase.isValidSpelling(word.spelling)) {
+            isValid = false
+            hasSpellingError = true
+        }
+        if (!ValidationTextFieldUseCase.isValidTranslation(word.translation)) {
+            isValid = false
+            hasTranslationError = true
+        }
+        if (!isValid) {
+            state.wordListItemExpandedState.value = state.wordListItemExpandedState.value.copy(
+                hasSpellingError = hasSpellingError,
+                hasTranslationError = hasTranslationError
+            )
+        }
+        return isValid
     }
 
     override fun deleteWord(word: Word) {

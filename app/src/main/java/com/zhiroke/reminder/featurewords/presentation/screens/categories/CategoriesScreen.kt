@@ -57,7 +57,6 @@ fun CategoriesScreen(
                     )
                     PagerContent(
                         pagerState = pagerState,
-                        navController = navController,
                         categories = state.categories
                     )
                 }

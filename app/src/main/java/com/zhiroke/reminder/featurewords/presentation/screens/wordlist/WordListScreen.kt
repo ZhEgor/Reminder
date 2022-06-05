@@ -11,6 +11,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,19 +21,49 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.zhiroke.reminder.R
+import com.zhiroke.reminder.core.presentation.components.YesNoDialog
 import com.zhiroke.reminder.core.presentation.components.animatedShimmerBrush
 import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.ShimmeringWordListItem
 import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.WordListItem
 import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.WordListItemExpanded
+import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.components.WordListItemExpandedState
 
 @Composable
 fun WordListScreen(
-    navController: NavController,
     viewModel: WordListViewModel
 ) {
     val state = viewModel.state
+    val isActiveDeleteDialog = remember { mutableStateOf(false) }
+    val isActiveSaveDialog = remember { mutableStateOf(false) }
+
+    if (isActiveDeleteDialog.value) {
+        state.deleteWord?.let { word ->
+            YesNoDialog(
+                title = stringResource(R.string.delete_title, word.spelling),
+                yesText = stringResource(id = R.string.delete),
+                noText = stringResource(id = R.string.cancel),
+                onClickYes = {
+                    viewModel.deleteWord(word)
+                },
+                onDismiss = { isActiveDeleteDialog.value = false }
+            )
+        }
+    }
+
+    if (isActiveSaveDialog.value) {
+        state.saveWord?.let { word ->
+            YesNoDialog(
+                title = stringResource(R.string.save_title),
+                yesText = stringResource(id = R.string.save),
+                noText = stringResource(id = R.string.cancel),
+                onClickYes = {
+                    viewModel.updateWord(word)
+                },
+                onDismiss = { isActiveSaveDialog.value = false }
+            )
+        }
+    }
 
     if (state.words.value.isNotEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -48,6 +80,7 @@ fun WordListScreen(
                             .background(MaterialTheme.colors.primary)
                             .clickable {
                                 state.focusedWord.value = word
+                                state.wordListItemExpandedState.value = WordListItemExpandedState()
                             },
                         position = position + 1,
                         word = word
@@ -63,13 +96,17 @@ fun WordListScreen(
                             .background(MaterialTheme.colors.primary)
                             .clickable {
                                 state.focusedWord.value = null
+                                state.wordListItemExpandedState.value = WordListItemExpandedState()
                             },
+                        state = state.wordListItemExpandedState.value,
                         word = word,
                         position = position + 1,
                         onSave = {
-
+                            state.saveWord = it
+                            isActiveSaveDialog.value = true
                         }, onDelete = {
-
+                            state.deleteWord = it
+                            isActiveDeleteDialog.value = true
                         }
                     )
                 }

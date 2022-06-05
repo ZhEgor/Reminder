@@ -6,14 +6,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.zhiroke.reminder.featurewords.presentation.screens.categories.CategoriesScreen
 import com.zhiroke.reminder.featurewords.presentation.screens.createword.CreateWordScreen
 import com.zhiroke.reminder.featurewords.presentation.screens.wordlist.WordListScreen
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -38,7 +36,6 @@ fun Navigation() {
             )
         ) { entry ->
             WordListScreen(
-                navController = navController,
                 viewModel = getViewModel(parameters = { parametersOf(entry.arguments?.get("categoryId")) })
             )
         }

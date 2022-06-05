@@ -8,6 +8,7 @@ import com.zhiroke.reminder.core.presentation.base.BaseViewModel
 import com.zhiroke.reminder.featurewords.domain.usecase.category.LoadCategories
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 abstract class CategoriesViewModel : BaseViewModel() {
 
@@ -27,7 +28,9 @@ class CategoriesViewModelImpl(
     private fun loadCategories() {
         viewModelScope.launch(Dispatchers.IO) {
             loadCategories.invoke().collect { categories ->
-                state = state.copy(isLoading = false, categories = categories)
+                withContext(Dispatchers.Main) {
+                    state = state.copy(isLoading = false, categories = categories)
+                }
             }
         }
     }

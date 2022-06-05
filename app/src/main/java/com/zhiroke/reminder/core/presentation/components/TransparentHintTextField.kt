@@ -1,4 +1,4 @@
-package com.zhiroke.reminder.featurewords.presentation.screens.createword.components
+package com.zhiroke.reminder.core.presentation.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +17,7 @@ fun TransparentHintTextField(
     text: String,
     hint: String = "",
     isHintVisible: Boolean = true,
+    enabled: Boolean = true,
     textStyle: TextStyle = TextStyle(),
     singleLine: Boolean = false,
     onFocusChange: (FocusState) -> Unit = {},
@@ -24,15 +25,16 @@ fun TransparentHintTextField(
 ) {
     Box(modifier = modifier) {
         BasicTextField(
-            value = text,
-            onValueChange = onValueChange,
-            singleLine = singleLine,
-            textStyle = textStyle,
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged {
                     onFocusChange(it)
-                }
+                },
+            value = text,
+            onValueChange = onValueChange,
+            singleLine = singleLine,
+            textStyle = textStyle,
+            enabled = enabled
         )
         if (text.isEmpty() && isHintVisible) {
             Text(

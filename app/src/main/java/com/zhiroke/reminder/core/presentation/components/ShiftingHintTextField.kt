@@ -1,4 +1,4 @@
-package com.zhiroke.reminder.featurewords.presentation.screens.createword.components
+package com.zhiroke.reminder.core.presentation.components
 
 import androidx.compose.animation.core.animateOffset
 import androidx.compose.animation.core.updateTransition
@@ -26,10 +26,11 @@ import androidx.compose.ui.unit.sp
 import com.zhiroke.reminder.R
 
 @Composable
-fun CreateWordField(
+fun ShiftingHintTextField(
     value: String,
     title: String,
     hasError: Boolean = false,
+    enabled: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
@@ -99,8 +100,7 @@ fun CreateWordField(
         ) {
 
             Box(
-                Modifier
-                    .weight(1f)
+                Modifier.weight(1f)
             ) {
                 TransparentHintTextField(
                     text = value,
@@ -110,14 +110,14 @@ fun CreateWordField(
                         labelPosition =
                             if (!it.isFocused && value.isEmpty()) LabelPosition.HintPosition
                             else LabelPosition.LabelPosition
-                    }
+                    },
+                    enabled = enabled
                 ) {
                     onValueChange(it)
                 }
             }
             Box(
-                modifier = Modifier
-                    .padding(start = 8.dp, end = 21.dp),
+                modifier = Modifier.padding(start = 8.dp, end = 21.dp),
             ) {
                 if (value.isNotEmpty()) {
                     Icon(
@@ -151,5 +151,5 @@ private enum class LabelPosition {
 @Preview
 @Composable
 fun PreviewCreateWordField() {
-    CreateWordField(title = "Spelling", value = "test", onValueChange = { })
+    ShiftingHintTextField(title = "Spelling", value = "test", onValueChange = { })
 }

@@ -11,12 +11,6 @@ val ErrorRed = Color(0xFFB00020)
 val DarkGray = Color(0xFF202020)
 val LightBlue = Color(0xFFD7E8DE)
 
-val RedOrange = Color(0xffffab91)
-val RedPink = Color(0xfff48fb1)
-val BabyBlue = Color(0xff81deea)
-val Violet = Color(0xffcf94da)
-val LightGreen = Color(0xffe7ed9b)
-
 /** Light colors */
 val UranianBlue = Color(0xFFC3E7FF)
 val PeriwinkleCrayola = Color(0xFFD3E3FD)
@@ -49,4 +43,3 @@ val White30 = Color(0x30FFFFFF)
 val White20 = Color(0x20FFFFFF)
 val White10 = Color(0x10FFFFFF)
 val White5 = Color(0x05FFFFFF)
-val Transparent = Color(0x00FFFFFF)

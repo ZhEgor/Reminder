@@ -14,49 +14,4 @@
     <!-- Common colors -->
     <color name="black">#121212</color>
     <color name="white">#FFFFFF</color>
-    <color name="black_5">#F3F3F3</color>
-    <color name="black_5_opacity_50">#80F3F3F3</color>
-    <color name="red">#ED0E00</color>
-    <color name="red_80">#F13E33</color>
-    <color name="red_10">#FFE2E0</color>
-    <color name="turquoise">#1598A6</color>
-    <color name="turquoise_80">#44ADB8</color>
-    <color name="turquoise_bright_10">#E8F8F9</color>
-    <color name="pink">#E0016C</color>
-    <color name="pink_80">#E63489</color>
-    <color name="pink_10">#FFE7F3</color>
-    <color name="blue_dark">#09546E</color>
-    <color name="blue_dark_80">#3A768B</color>
-    <color name="blue_light_60">#DEF6FF</color>
-    <color name="blue_pale_40">#DCEAFF</color>
-    <color name="yellow">#FED731</color>
-    <color name="yellow_30">#FFF0BD</color>
-
-
-    <!-- Black gradation -->
-    <color name="black_90">#2A2A2A</color>
-    <color name="black_80">#414141</color>
-    <color name="black_70">#595959</color>
-    <color name="black_60">#717171</color>
-    <color name="black_50">#888888</color>
-    <color name="black_40">#A0A0A0</color>
-    <color name="black_30">#B8B8B8</color>
-    <color name="black_20">#D0D0D0</color>
-    <color name="black_10">#E7E7E7</color>
-    <color name="black_2">#FAFAFA</color>
-
-    <!-- White gradation with alpha channel -->
-    <color name="white_96">#96FFFFFF</color>
-    <color name="white_80">#80FFFFFF</color>
-    <color name="white_70">#70FFFFFF</color>
-    <color name="white_50">#50FFFFFF</color>
-    <color name="white_30">#30FFFFFF</color>
-    <color name="white_20">#20FFFFFF</color>
-    <color name="white_10">#10FFFFFF</color>
-    <color name="white_5">#05FFFFFF</color>
-    <color name="white_0">#00FFFFFF</color>
-    <color name="light_blue_50">#FFE1F5FE</color>
-    <color name="light_blue_200">#FF81D4FA</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="light_blue_900">#FF01579B</color>
 </resources>

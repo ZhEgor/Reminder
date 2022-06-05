@@ -99,7 +99,7 @@ fun CreateCategoryDialog(viewModel: CreateWordViewModel) {
                                 Icon(
                                     modifier = Modifier.padding(end = 4.dp),
                                     imageVector = Icons.Default.Close,
-                                    contentDescription = "cancel category creation",
+                                    contentDescription = stringResource(R.string.cancel_category_creation_description),
                                     tint = MaterialTheme.colors.onPrimary
                                 )
                                 Text(
@@ -129,7 +129,7 @@ fun CreateCategoryDialog(viewModel: CreateWordViewModel) {
                                 Icon(
                                     modifier = Modifier.padding(end = 4.dp),
                                     imageVector = Icons.Default.Done,
-                                    contentDescription = "create new category"
+                                    contentDescription = stringResource(R.string.create_new_category_description)
                                 )
                                 Text(text = stringResource(id = R.string.create))
                             }

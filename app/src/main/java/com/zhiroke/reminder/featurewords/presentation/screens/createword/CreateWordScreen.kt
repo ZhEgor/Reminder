@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,10 +16,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.zhiroke.reminder.R
-import com.zhiroke.reminder.featurewords.presentation.screens.createword.components.*
+import com.zhiroke.reminder.core.presentation.components.ShiftingHintTextField
+import com.zhiroke.reminder.featurewords.presentation.screens.createword.components.CreateCategoryDialog
+import com.zhiroke.reminder.featurewords.presentation.screens.createword.components.Dash
+import com.zhiroke.reminder.featurewords.presentation.screens.createword.components.SelectCategoryDialog
+import com.zhiroke.reminder.featurewords.presentation.screens.createword.components.SelectCategoryField
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CreateWordScreen(
     navController: NavController?,
@@ -47,26 +49,27 @@ fun CreateWordScreen(
                 .padding(16.dp)
         )
         Text(text = stringResource(R.string.word_creator), style = MaterialTheme.typography.h5)
-        CreateWordField(
+        ShiftingHintTextField(
             title = stringResource(R.string.spelling),
             value = uiState.spellingState.text,
             hasError = uiState.spellingState.hasError
         ) {
             uiState.spellingState = uiState.spellingState.copy(text = it, hasError = false)
         }
-        CreateWordField(
+        ShiftingHintTextField(
             title = stringResource(R.string.translation),
             value = uiState.translationState.text,
             hasError = uiState.translationState.hasError
         ) {
             uiState.translationState = uiState.translationState.copy(text = it, hasError = false)
         }
-        CreateWordField(
+        ShiftingHintTextField(
             title = stringResource(R.string.pronunciation),
             value = uiState.pronunciationState.text,
             hasError = uiState.pronunciationState.hasError
         ) {
-            uiState.pronunciationState = uiState.pronunciationState.copy(text = it, hasError = false)
+            uiState.pronunciationState =
+                uiState.pronunciationState.copy(text = it, hasError = false)
         }
         SelectCategoryField(text = uiState.categoryFieldState.category?.name) {
             isSelectCategoryDialogActive.value = true
