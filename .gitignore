@@ -13,3 +13,15 @@
 .externalNativeBuild
 .cxx
 local.properties
+/buildSrc/build/
+/hs_err_pid6820.log
+/hs_err_pid7524.log
+/hs_err_pid12320.log
+/hs_err_pid13028.log
+/hs_err_pid13084.log
+/hs_err_pid14852.log
+/replay_pid7524.log
+/replay_pid12320.log
+/replay_pid13028.log
+/replay_pid13084.log
+/replay_pid14852.log

@@ -1,23 +1,26 @@
 package com.zhiroke.reminder.di.modules
 
-import com.zhiroke.reminder.useCase.category.AddNewCategoryUseCase
-import com.zhiroke.reminder.useCase.category.LoadCategoriesUseCase
-import com.zhiroke.reminder.useCase.category.UpdateCategoryUseCase
-import com.zhiroke.reminder.useCase.word.*
+import com.zhiroke.reminder.featurewords.domain.usecase.category.AddCategory
+import com.zhiroke.reminder.featurewords.domain.usecase.category.CategoryUseCase
+import com.zhiroke.reminder.featurewords.domain.usecase.category.LoadCategories
+import com.zhiroke.reminder.featurewords.domain.usecase.category.UpdateCategory
+import com.zhiroke.reminder.featurewords.domain.usecase.word.*
 import org.koin.dsl.module
 
 val useCasesModule = module {
 
     /* Word */
-    factory { AddNewWordUseCase(get()) }
-    factory { UpdateWordUseCase(get()) }
-    factory { DeleteWordsUseCase(get()) }
-    factory { LoadWordsUseCase(get()) }
-    factory { LoadWordsFromPositionUseCase(get()) }
+    factory { WordUseCase(get(), get(), get(), get(), get()) }
+    factory { AddWord(get()) }
+    factory { UpdateWord(get()) }
+    factory { DeleteWords(get()) }
+    factory { LoadWordsFromPosition(get()) }
+    factory { LastAddedWordFlow(get()) }
 
     /* Category */
-    factory { AddNewCategoryUseCase(get()) }
-    factory { LoadCategoriesUseCase(get()) }
-    factory { UpdateCategoryUseCase(get()) }
+    factory { CategoryUseCase(get(), get(), get()) }
+    factory { AddCategory(get()) }
+    factory { LoadCategories(get()) }
+    factory { UpdateCategory(get()) }
 
 }
