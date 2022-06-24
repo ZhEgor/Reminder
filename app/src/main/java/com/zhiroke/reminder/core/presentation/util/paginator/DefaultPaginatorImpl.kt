@@ -1,4 +1,4 @@
-package com.zhiroke.reminder.core.presentation.util
+package com.zhiroke.reminder.core.presentation.util.paginator
 
 class DefaultPaginatorImpl<Key, Item>(
     private val initialKey: Key,

@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/java/com/zhiroke/reminder/core/presentation/components/ShiftingHintTextField.kt" value="0.2712962962962963" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/java/com/zhiroke/reminder/core/presentation/components/YesNoDialog.kt" value="0.35515151515151516" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/java/com/zhiroke/reminder/featurewords/presentation/screens/categories/CategoriesScreen.kt" value="1.5181347150259068" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/java/com/zhiroke/reminder/featurewords/presentation/screens/createword/CreateWordScreen.kt" value="0.1906474820143885" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/java/com/zhiroke/reminder/featurewords/presentation/screens/createword/components/Dash.kt" value="1.6" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/java/com/zhiroke/reminder/featurewords/presentation/screens/createword/components/SelectCategoryField.kt" value="0.2712962962962963" />
+        <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/java/com/zhiroke/reminder/featurewords/presentation/screens/wordlist/components/WordListItemExpanded.kt" value="0.21326013513513514" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable-v21/app_widget_background.xml" value="0.2" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable-v21/app_widget_inner_view_background.xml" value="0.1285" />
         <entry key="..\:/source/repos/AndroidStudioProjects/Reminder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
