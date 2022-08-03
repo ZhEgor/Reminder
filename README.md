@@ -1,2 +1,2 @@
 # Reminder
-App for learning new words
+Your assistant for recording and memorizing new words
